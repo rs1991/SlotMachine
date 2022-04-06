@@ -26,7 +26,7 @@ namespace SlotMachine
             int[,] rows = new int[3, 3] {
                 { num1, num2, num3 },
                 { num4, num5, num6 },
-                { num7, num7, num8 } };
+                { num7, num8, num9 } };
 
             Console.WriteLine("Place your wager: ");
             Wager = Convert.ToDouble(Console.ReadLine());
@@ -39,6 +39,10 @@ namespace SlotMachine
             {
                 case "T":
                     Console.WriteLine("Play the top line");
+                    if(num1 == num2 && num2 == num3)
+                    {
+                        Console.WriteLine("You win: $" + Winnings);
+                    }
                     break;
 
                 case "C":
@@ -56,23 +60,12 @@ namespace SlotMachine
                 case "D":
                     Console.WriteLine("Play diagonal lines");
                     break;
-
-                    
-
-
-
-
             }
 
-            /*if(LineToPlay == "T")
-            {
-                Console.WriteLine("Play the top line");
-            }
-            if (LineToPlay == "C")
-            {
-                Console.WriteLine("Play the center line");
-            }
-            */
+            Console.WriteLine("Here are your winnings: $ " + Winnings);
+            Console.ReadLine();
+
+            
 
         }
 
