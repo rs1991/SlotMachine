@@ -6,8 +6,8 @@ namespace SlotMachine
     {
         static void Main(string[] args)
         {
-            double Wager = 0, Winnings = 0;
-            string TopLine, CenterLine, AllHorizontal, AllVertical, Diagonal, LineToPlay;
+            double Wager = 0, Winnings = 0, Odds = 2;
+            string LineToPlay;
 
             Console.WriteLine("Welcome to the slot machine!");
 
@@ -28,46 +28,85 @@ namespace SlotMachine
                 { num4, num5, num6 },
                 { num7, num8, num9 } };
 
-            Console.WriteLine("Place your wager: ");
+            Console.Write("Place your wager: ");
             Wager = Convert.ToDouble(Console.ReadLine());
 
             Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines");
             LineToPlay = Console.ReadLine().ToUpper();
 
-
             switch (LineToPlay)
             {
                 case "T":
-                    Console.WriteLine("Play the top line");
-                    if(num1 == num2 && num2 == num3)
+
+                    Console.WriteLine($"{num1} {num2} {num3}");
+
+                    if (num1 == num2 && num2 == num3)
                     {
-                        Console.WriteLine("You win: $" + Winnings);
+
+                        Winnings = Wager * Odds;
                     }
                     break;
 
                 case "C":
-                    Console.WriteLine("Play the center line");
+
+                    Console.WriteLine($"{num4} {num5} {num6}");
+
+                    if (num4 == num5 && num5 == num6)
+                    {
+
+                        Winnings = Wager * Odds;
+                    }
                     break;
 
                 case "AH":
                     Console.WriteLine("Play all horizontal lines");
+                    Console.WriteLine($"{num1} {num2} {num3}");
+                    Console.WriteLine($"{num4} {num5} {num6}");
+                    Console.WriteLine($"{num7} {num8} {num9}");
+
+                    if (num1 == num2 && num2 == num3)
+                    {
+                        Winnings = Wager * Odds;
+                    }
+                    if (num4 == num5 && num5 == num6)
+                    {
+                        Winnings = Wager * Odds;
+                    }
+                    if (num7 == num8 && num8 == num9)
+                    {
+                        Winnings = Wager * Odds;
+                    }
                     break;
 
                 case "AV":
                     Console.WriteLine("Play all vertical lines");
+                    if (num1 == num4 && num4 == num7)
+                    { 
+                        Winnings = Wager * Odds;
+                    }
+                    if (num2 == num5 && num5 == num8)
+                    {
+                        Winnings = Wager * Odds;
+                    }
+                    if (num3 == num6 && num6 == num9)
+                    {
+                        Winnings = Wager * Odds;
+                    }
                     break;
 
                 case "D":
-                    Console.WriteLine("Play diagonal lines");
+                    Console.WriteLine($"{num1} {num5} {num9}");
+
+                    if (num1 == num5 && num5 == num9)
+                    {
+                        Winnings = Wager * Odds;
+                    }
                     break;
             }
 
+
             Console.WriteLine("Here are your winnings: $ " + Winnings);
-            Console.ReadLine();
-
-            
-
+            Console.ReadKey();
         }
-
     }
 }
