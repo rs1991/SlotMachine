@@ -8,31 +8,27 @@ namespace SlotMachine
         {
             double Wager = 0, Winnings = 0, Odds = 2;
             string LineToPlay;
-            bool Decision = true;
+            bool PlayAgain = true;
 
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the slot machine!");
             Console.WriteLine("----------------------------");
 
             //Random number generator
-            Random random = new Random();
-            int num1 = random.Next(9);
-            int num2 = random.Next(9);
-            int num3 = random.Next(9);
-            int num4 = random.Next(9);
-            int num5 = random.Next(9);
-            int num6 = random.Next(9);
-            int num7 = random.Next(9);
-            int num8 = random.Next(9);
-            int num9 = random.Next(9);
+            Random rng = new Random();
 
-            int[,] rows = new int[3, 3] {
-                { num1, num2, num3 },
-                { num4, num5, num6 },
-                { num7, num8, num9 } };
+            int[,] rows = new int[3, 3];
 
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    // Console.WriteLine($"i: {i} j: {j}");
+                    rows[row, col] = rng.Next(9);
+                }
+            }
 
-            while (Decision)
+            while (PlayAgain)
             {
 
                 string Answer = "";
@@ -47,20 +43,41 @@ namespace SlotMachine
                 {
                     case "T":
 
-                        Console.WriteLine($"{num1} {num2} {num3}");
-
-                        if (num1 == num2 && num2 == num3)
+                        for (int row = 0; row < 3; row++)
                         {
+                            for (int col = 0; col < 3; col++)
+                            {
 
+                                rows[row, col] = rng.Next(9);
+                            }
+                        }
+
+                        Console.WriteLine(rows[0, 0]);
+                        Console.WriteLine(rows[0, 1]);
+                        Console.WriteLine(rows[0, 2]);
+
+                        if (rows[0, 0] == rows[0, 1] && rows[0, 0] == rows[0, 2])
+                        {
                             Winnings = Wager * Odds;
                         }
                         break;
 
                     case "C":
 
-                        Console.WriteLine($"{num4} {num5} {num6}");
+                        for (int row = 0; row < 3; row++)
+                        {
+                            for (int col = 0; col < 3; col++)
+                            {
 
-                        if (num4 == num5 && num5 == num6)
+                                rows[row, col] = rng.Next(9);
+                            }
+                        }
+
+                        Console.WriteLine(rows[1, 0]);
+                        Console.WriteLine(rows[1, 1]);
+                        Console.WriteLine(rows[1, 2]);
+
+                        if (rows[1, 0] == rows[1, 1] && rows[1, 1] == rows[1, 2])
                         {
 
                             Winnings = Wager * Odds;
@@ -68,51 +85,108 @@ namespace SlotMachine
                         break;
 
                     case "AH":
-                        Console.WriteLine("Play all horizontal lines");
-                        Console.WriteLine($"{num1} {num2} {num3}");
-                        Console.WriteLine($"{num4} {num5} {num6}");
-                        Console.WriteLine($"{num7} {num8} {num9}");
 
-                        if (num1 == num2 && num2 == num3)
+                        for (int row = 0; row < 3; row++)
                         {
+                            for (int col = 0; col < 3; col++)
+                            {
+                                rows[row, col] = rng.Next(9);
+                            }
+                        }
+
+                        Console.WriteLine("Line 1");
+                        Console.WriteLine(rows[0, 0]);
+                        Console.WriteLine(rows[0, 1]);
+                        Console.WriteLine(rows[0, 2]);
+                        Console.WriteLine("Line 2");
+                        Console.WriteLine(rows[1, 0]);
+                        Console.WriteLine(rows[1, 1]);
+                        Console.WriteLine(rows[1, 2]);
+                        Console.WriteLine("Line 3");
+                        Console.WriteLine(rows[2, 0]);
+                        Console.WriteLine(rows[2, 1]);
+                        Console.WriteLine(rows[2, 2]);
+
+
+                        if (rows[0, 0] == rows[0, 1] && rows[0, 0] == rows[0, 2])
+                        {
+
                             Winnings = Wager * Odds;
                         }
-                        if (num4 == num5 && num5 == num6)
+
+                        if (rows[1, 0] == rows[1, 1] && rows[1, 0] == rows[1, 2])
                         {
+
                             Winnings = Wager * Odds;
                         }
-                        if (num7 == num8 && num8 == num9)
+
+                        if (rows[2, 0] == rows[2, 1] && rows[2, 1] == rows[2, 2])
                         {
+
                             Winnings = Wager * Odds;
                         }
+
                         break;
 
                     case "AV":
                         Console.WriteLine("Play all vertical lines");
-                        if (num1 == num4 && num4 == num7)
+
+                        for (int row = 0; row < 3; row++)
                         {
-                            Winnings = Wager * Odds;
+                            for (int col = 0; col < 3; col++)
+                            {
+                                rows[row, col] = rng.Next(9);
+                            }
                         }
-                        if (num2 == num5 && num5 == num8)
+
+                        Console.WriteLine("Line 1");
+                        Console.WriteLine(rows[0, 0]);
+                        Console.WriteLine(rows[1, 0]);
+                        Console.WriteLine(rows[2, 0]);
+
+                        Console.WriteLine("Line 2");
+                        Console.WriteLine(rows[0, 1]);
+                        Console.WriteLine(rows[1, 1]);
+                        Console.WriteLine(rows[2, 1]);
+
+                        Console.WriteLine("Line 3");
+                        Console.WriteLine(rows[0, 2]);
+                        Console.WriteLine(rows[1, 2]);
+                        Console.WriteLine(rows[2, 2]);
+
+
+                        if (rows[0, 0] == rows[1, 0] && rows[0, 0] == rows[2, 0])
                         {
-                            Winnings = Wager * Odds;
-                        }
-                        if (num3 == num6 && num6 == num9)
-                        {
+
                             Winnings = Wager * Odds;
                         }
                         break;
 
                     case "D":
-                        Console.WriteLine($"{num1} {num5} {num9}");
 
-                        if (num1 == num5 && num5 == num9)
+                        for (int row = 0; row < 3; row++)
                         {
+                            for (int col = 0; col < 3; col++)
+                            {
+                                rows[row, col] = rng.Next(9);
+                            }
+                        }
+
+                        Console.WriteLine(rows[0, 0]);
+                        Console.WriteLine(rows[1, 1]);
+                        Console.WriteLine(rows[2, 2]);
+
+                        if (rows[0, 0] == rows[1, 1] && rows[0, 0] == rows[2, 2])
+                        {
+
                             Winnings = Wager * Odds;
                         }
+
                         break;
                 }
+                Console.WriteLine("\n-------------------------------------");
                 Console.WriteLine("Here are your winnings: $ " + Winnings);
+                Console.WriteLine("--------------------------------------");
 
 
                 Console.Write("Do you want to play again: ");
@@ -120,11 +194,11 @@ namespace SlotMachine
 
                 if (Answer == "Y")
                 {
-                    Decision = true;
+                    PlayAgain = true;
                 }
                 else
                 {
-                    Decision = false;
+                    PlayAgain = false;
                 }
             }
 
