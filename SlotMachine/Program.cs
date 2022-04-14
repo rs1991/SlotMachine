@@ -6,7 +6,7 @@ namespace SlotMachine
     {
         static void Main(string[] args)
         {
-            double Wager = 0, Winnings = 0, Odds = 2;
+            double Winnings = 0, Odds = 2;
             string LineToPlay;
             bool PlayAgain = true;
 
@@ -28,16 +28,23 @@ namespace SlotMachine
                 }
             }
 
+
             while (PlayAgain)
             {
 
-                string Answer = "";
-
                 Console.Write("Place your wager: ");
-                Wager = Convert.ToDouble(Console.ReadLine());
+                var UserWager = Console.ReadLine();
 
+                double Wager;
+                while(!double.TryParse(UserWager, out Wager))
+                {
+                    Console.WriteLine("Please insert a valid number to continue: ");
+                    UserWager = Console.ReadLine();
+                }
+                
                 Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines");
                 LineToPlay = Console.ReadLine().ToUpper();
+            
 
                 switch (LineToPlay)
                 {
@@ -188,7 +195,7 @@ namespace SlotMachine
                 Console.WriteLine("Here are your winnings: $ " + Winnings);
                 Console.WriteLine("--------------------------------------");
 
-
+                string Answer = "";
                 Console.Write("Do you want to play again: ");
                 Answer = Console.ReadLine().ToUpper();
 
@@ -207,5 +214,4 @@ namespace SlotMachine
         }
 
     }
-
 }
