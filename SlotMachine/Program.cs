@@ -151,22 +151,6 @@ namespace SlotMachine
                     Console.Write("\n");
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 Console.WriteLine("\n-------------------------------------");
                 Console.WriteLine("Here are your winnings: $ " + Winnings);
                 Console.WriteLine("--------------------------------------");
