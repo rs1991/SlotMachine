@@ -17,6 +17,7 @@ namespace SlotMachine
             //Random number generator
             Random rng = new Random();
 
+            //Grid array
             int[,] rows = new int[3, 3];
 
 
@@ -30,10 +31,8 @@ namespace SlotMachine
                 double Wager;
                 while (!double.TryParse(UserWager, out Wager) || Wager < 0)
                 {
-                    Console.WriteLine("Please insert a valid number to continue: ");
+                    Console.Write("Please insert a valid number to continue: $ ");
                     UserWager = Console.ReadLine();
-
-
                 }
 
                 Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines");
@@ -88,18 +87,13 @@ namespace SlotMachine
                             }
                         }
 
-
-                        if (rows[0, 0] == rows[0, 1] &&
-                            rows[0, 0] == rows[0, 2] &&
-                            rows[1, 0] == rows[1, 1] &&
-                            rows[1, 0] == rows[1, 2] &&
-                            rows[2, 0] == rows[2, 1] &&
-                            rows[2, 1] == rows[2, 2])
+                        for (int row = 0; row < 2; row++)
                         {
-
-                            Winnings = Wager * Odds;
-                        }
-
+                            if (rows[row, 0] == rows[row, 1] && rows[row, 1] == rows[row, 2])
+                            {
+                                Winnings = Wager * Odds;
+                            }
+                        }                        
                         break;
 
                     case "AV":
