@@ -38,20 +38,18 @@ namespace SlotMachine
                 Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines");
                 LineToPlay = Console.ReadLine().ToUpper();
 
+                for (int row = 0; row < 3; row++)
+                {
+                    for (int col = 0; col < 3; col++)
+                    {
+
+                        rows[row, col] = rng.Next(9);
+                    }
+                }
 
                 switch (LineToPlay)
                 {
                     case "T":
-
-                        for (int row = 0; row < 3; row++)
-                        {
-                            for (int col = 0; col < 3; col++)
-                            {
-
-                                rows[row, col] = rng.Next(9);
-                            }
-                        }
-
 
                         if (rows[0, 0] == rows[0, 1] && rows[0, 0] == rows[0, 2])
                         {
@@ -60,15 +58,6 @@ namespace SlotMachine
                         break;
 
                     case "C":
-
-                        for (int row = 0; row < 3; row++)
-                        {
-                            for (int col = 0; col < 3; col++)
-                            {
-
-                                rows[row, col] = rng.Next(9);
-                            }
-                        }
 
                         if (rows[1, 0] == rows[1, 1] && rows[1, 1] == rows[1, 2])
                         {
@@ -81,32 +70,15 @@ namespace SlotMachine
 
                         for (int row = 0; row < 3; row++)
                         {
-                            for (int col = 0; col < 3; col++)
-                            {
-                                rows[row, col] = rng.Next(9);
-                            }
-                        }
-
-                        for (int row = 0; row < 3; row++)
-                        {
                             if (rows[row, 0] == rows[row, 1] && rows[row, 1] == rows[row, 2])
                             {
                                 Winnings = Wager * Odds;
                             }
-                        }                        
+                        }
                         break;
 
                     case "AV":
                         Console.WriteLine("Play all vertical lines");
-
-                        for (int row = 0; row < 3; row++)
-                        {
-                            for (int col = 0; col < 3; col++)
-                            {
-                                rows[row, col] = rng.Next(9);
-                            }
-                        }
-
 
                         if (rows[0, 0] == rows[1, 0] && rows[0, 0] == rows[2, 0])
                         {
@@ -116,15 +88,7 @@ namespace SlotMachine
                         break;
 
                     case "D":
-
-                        for (int row = 0; row < 3; row++)
-                        {
-                            for (int col = 0; col < 3; col++)
-                            {
-                                rows[row, col] = rng.Next(9);
-                            }
-                        }
-
+                                                
                         if (rows[0, 0] == rows[1, 1] && rows[0, 0] == rows[2, 2])
                         {
 
@@ -166,6 +130,5 @@ namespace SlotMachine
             Console.WriteLine("Thanks for playing");
             Console.ReadKey();
         }
-
     }
 }
