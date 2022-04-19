@@ -87,7 +87,7 @@ namespace SlotMachine
                             }
                         }
 
-                        for (int row = 0; row < 2; row++)
+                        for (int row = 0; row < 3; row++)
                         {
                             if (rows[row, 0] == rows[row, 1] && rows[row, 1] == rows[row, 2])
                             {
