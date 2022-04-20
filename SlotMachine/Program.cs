@@ -53,7 +53,7 @@ namespace SlotMachine
 
                         if (rows[0, 0] == rows[0, 1] && rows[0, 0] == rows[0, 2])
                         {
-                            Winnings = Wager * Odds;
+                            Winnings = (Wager * Odds / 1) + 1;
                         }
                         break;
 
@@ -62,7 +62,7 @@ namespace SlotMachine
                         if (rows[1, 0] == rows[1, 1] && rows[1, 1] == rows[1, 2])
                         {
 
-                            Winnings = Wager * Odds;
+                            Winnings = (Wager * Odds / 1) + 1;
                         }
                         break;
 
@@ -70,9 +70,11 @@ namespace SlotMachine
 
                         for (int row = 0; row < 3; row++)
                         {
-                            if (rows[row, 0] == rows[row, 1] && rows[row, 1] == rows[row, 2])
+
+                            if (rows[row, 0] == rows[row, 1] && rows[row, 1] == rows[row, 2]
+                                && rows[row, 0] == rows[row, 2])
                             {
-                                Winnings = Wager * Odds;
+                                Winnings = (Wager * Odds / 1) * 3 + 1;
                             }
                         }
                         break;
@@ -83,16 +85,16 @@ namespace SlotMachine
                         if (rows[0, 0] == rows[1, 0] && rows[0, 0] == rows[2, 0])
                         {
 
-                            Winnings = Wager * Odds;
+                            Winnings = (Wager * Odds / 1) + 1;
                         }
                         break;
 
                     case "D":
-                                                
+
                         if (rows[0, 0] == rows[1, 1] && rows[0, 0] == rows[2, 2])
                         {
 
-                            Winnings = Wager * Odds;
+                            Winnings = (Wager * Odds / 1) + 1;
                         }
 
                         break;
