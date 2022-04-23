@@ -7,7 +7,6 @@ namespace SlotMachine
         static void Main(string[] args)
         {
             double Winnings = 0, Odds = 2;
-            string LineToPlay;
             bool PlayAgain = true;
 
             Console.WriteLine("----------------------------");
@@ -20,11 +19,10 @@ namespace SlotMachine
             //Grid array
             int[,] rows = new int[3, 3];
 
-
             while (PlayAgain)
             {
 
-                Console.WriteLine("------------------");
+                Console.WriteLine("----------------");
                 Console.Write("Place your wager: $ ");
                 var UserWager = Console.ReadLine();
 
@@ -35,16 +33,25 @@ namespace SlotMachine
                     UserWager = Console.ReadLine();
                 }
 
-                Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines");
-                LineToPlay = Console.ReadLine().ToUpper();
+                Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines: ");
+                var LineToPlay = Console.ReadLine().ToUpper();
+
+                if (string.IsNullOrEmpty(LineToPlay))
+                {
+                    Console.WriteLine("Please insert one of the options");
+                    LineToPlay = Console.ReadLine();
+                }
 
                 for (int row = 0; row < 3; row++)
                 {
+
                     for (int col = 0; col < 3; col++)
                     {
-
                         rows[row, col] = rng.Next(9);
+                        Console.Write("{0}\t", rows[row, col]);
+
                     }
+                    Console.Write("\n");
                 }
 
                 switch (LineToPlay)
@@ -53,7 +60,8 @@ namespace SlotMachine
 
                         if (rows[0, 0] == rows[0, 1] && rows[0, 0] == rows[0, 2])
                         {
-                            Winnings = (Wager * Odds / 1) + 1;
+                            Winnings = (Wager * Odds) + 1;
+
                         }
                         break;
 
@@ -62,7 +70,7 @@ namespace SlotMachine
                         if (rows[1, 0] == rows[1, 1] && rows[1, 1] == rows[1, 2])
                         {
 
-                            Winnings = (Wager * Odds / 1) + 1;
+                            Winnings = (Wager * Odds) + 1;
                         }
                         break;
 
@@ -71,44 +79,44 @@ namespace SlotMachine
                         for (int row = 0; row < 3; row++)
                         {
 
-                            if (rows[row, 0] == rows[row, 1] && rows[row, 1] == rows[row, 2]
-                                && rows[row, 0] == rows[row, 2])
+                            if (rows[0, 0] == rows[0, 1] &&
+                                rows[0, 1] == rows[0, 2] ||
+                                rows[1, 0] == rows[1, 1] &&
+                                rows[1, 1] == rows[1, 2] ||
+                                rows[2, 0] == rows[2, 1] &&
+                                rows[2,1] == rows[2,2])
                             {
-                                Winnings = (Wager * Odds / 1) * 3 + 1;
+                                Winnings = (Wager * Odds) + 1;
                             }
                         }
+
                         break;
 
                     case "AV":
-                        Console.WriteLine("Play all vertical lines");
 
-                        if (rows[0, 0] == rows[1, 0] && rows[0, 0] == rows[2, 0])
+                        for (int row = 0; row < 3; row++)
                         {
+                            if (rows[0, 0] == rows[1, 0] && rows[0, 0] == rows[2, 0] && rows[1, 0] == rows[2, 0])
+                            {
+                                Winnings = (Wager * Odds) + 1;
+                            }
 
-                            Winnings = (Wager * Odds / 1) + 1;
                         }
                         break;
 
                     case "D":
 
-                        if (rows[0, 0] == rows[1, 1] && rows[0, 0] == rows[2, 2])
+                        if (rows[0, 0] == rows[1, 1] && rows[0, 0] == rows[2, 2] && rows[2, 0] == rows[1, 1] && rows[1, 1] == rows[0, 2])
                         {
 
-                            Winnings = (Wager * Odds / 1) + 1;
+                            Winnings = (Wager * Odds) + 1;
                         }
 
                         break;
-                }
-
-                for (int row = 0; row < 3; row++)
-                {
-
-                    for (int col = 0; col < 3; col++)
-                    {
-                        Console.Write("{0}\t", rows[row, col]);
-
-                    }
-                    Console.Write("\n");
+                    default:
+                        Console.WriteLine("Please select one of the options to play");
+                        LineToPlay = Console.ReadLine();
+                        break;
                 }
 
                 Console.WriteLine("\n-------------------------------------");
