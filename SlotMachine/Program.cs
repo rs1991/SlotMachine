@@ -33,90 +33,92 @@ namespace SlotMachine
                     UserWager = Console.ReadLine();
                 }
 
-                Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines: ");
-                var LineToPlay = Console.ReadLine().ToUpper();
-
-                if (string.IsNullOrEmpty(LineToPlay))
-                {
-                    Console.WriteLine("Please insert one of the options");
-                    LineToPlay = Console.ReadLine();
-                }
-
+                //Grid to generate random numbers
                 for (int row = 0; row < 3; row++)
                 {
-
                     for (int col = 0; col < 3; col++)
                     {
                         rows[row, col] = rng.Next(9);
-                        Console.Write("{0}\t", rows[row, col]);
-
                     }
-                    Console.Write("\n");
                 }
+
+
+                Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines: ");
+                var LineToPlay = Console.ReadLine().ToUpper();
 
                 switch (LineToPlay)
                 {
                     case "T":
-
-                        if (rows[0, 0] == rows[0, 1] && rows[0, 0] == rows[0, 2])
+                        for (int row = 0; row > 3; row++)
                         {
-                            Winnings = (Wager * Odds) + 1;
-
+                            if (rows[row, 0] == rows[row, 1] &&
+                                rows[row, 0] == rows[row, 2])
+                            {
+                                //do something (add 2 coins to your winning)
+                                Winnings = (Wager * Odds) + 1;
+                            }
                         }
                         break;
-
                     case "C":
-
-                        if (rows[1, 0] == rows[1, 1] && rows[1, 1] == rows[1, 2])
+                        for (int row = 0; row < 3; row++)
                         {
-
-                            Winnings = (Wager * Odds) + 1;
+                            if (rows[row, 0] == rows[row, 1] &&
+                                rows[row, 1] == rows[row, 2])
+                            {
+                                Winnings = (Wager * Odds) + 1;
+                            }
                         }
                         break;
-
                     case "AH":
-
                         for (int row = 0; row < 3; row++)
                         {
-
-                            if (rows[0, 0] == rows[0, 1] &&
-                                rows[0, 1] == rows[0, 2] ||
-                                rows[1, 0] == rows[1, 1] &&
-                                rows[1, 1] == rows[1, 2] ||
-                                rows[2, 0] == rows[2, 1] &&
-                                rows[2,1] == rows[2,2])
+                            if (rows[row, 0] == rows[row, 1] &&
+                                rows[row, 1] == rows[row, 2])
                             {
+                                //do something (add 2 coins to your winning)
                                 Winnings = (Wager * Odds) + 1;
                             }
                         }
-
                         break;
-
                     case "AV":
-
-                        for (int row = 0; row < 3; row++)
+                        for (int col = 0; col < 3; col++)
                         {
-                            if (rows[0, 0] == rows[1, 0] && rows[0, 0] == rows[2, 0] && rows[1, 0] == rows[2, 0])
+                            if (rows[col, 0] == rows[col, 0] &&
+                                rows[col, 0] == rows[col, 0])
                             {
-                                Winnings = (Wager * Odds) + 1;
+                                //do something (add 2 coins to your winning)
+                                Winnings = (Wager * Odds) + 2;
                             }
-
                         }
                         break;
-
                     case "D":
-
-                        if (rows[0, 0] == rows[1, 1] && rows[0, 0] == rows[2, 2] && rows[2, 0] == rows[1, 1] && rows[1, 1] == rows[0, 2])
+                        for (int row = 0; row < 3; row++)
                         {
-
-                            Winnings = (Wager * Odds) + 1;
+                            if (rows[row, 0] == rows[row, 1] &&
+                                rows[row, 1] == rows[row, 2])
+                            {
+                                //do something (add 2 coins to your winning)
+                                Winnings = (Wager * Odds) + 1;
+                            }
                         }
-
                         break;
                     default:
-                        Console.WriteLine("Please select one of the options to play");
-                        LineToPlay = Console.ReadLine();
+                        Console.WriteLine("please enter a valid choice");
                         break;
+
+
+
+                }
+
+
+                //display grid and winnings
+                for (int row = 0; row < 3; row++)
+                {
+                    for (int col = 0; col < 3; col++)
+                    {
+                        Console.Write("{0}\t", rows[row, col]);
+                    }
+                    Console.Write("\n");
                 }
 
                 Console.WriteLine("\n-------------------------------------");
@@ -137,8 +139,9 @@ namespace SlotMachine
                 }
             }
 
-            Console.WriteLine("Thanks for playing");
-            Console.ReadKey();
+
+                Console.WriteLine("Thanks for playing");
+                Console.ReadKey();
+            }
         }
     }
-}
