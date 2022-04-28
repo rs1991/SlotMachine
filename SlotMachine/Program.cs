@@ -6,7 +6,7 @@ namespace SlotMachine
     {
         static void Main(string[] args)
         {
-            double Winnings = 0, Odds = 2;
+            double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
             bool PlayAgain = true;
 
             Console.WriteLine("----------------------------");
@@ -38,14 +38,14 @@ namespace SlotMachine
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        rows[row, col] = rng.Next(9);
+                       rows[row, col] = rng.Next(9);
                     }
                 }
 
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
-                    Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines: ");
+                    Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines: ");
                     var LineToPlay = Console.ReadLine().ToUpper();
                     switch (LineToPlay)
                     {
@@ -53,7 +53,6 @@ namespace SlotMachine
                             if (rows[0, 0] == rows[0, 1] &&
                                 rows[0, 1] == rows[0, 2])
                             {
-                                //do something (add 2 coins to your winning)
                                 Winnings = (Wager * Odds) + 1;
                             }
                             InvalidInput = false;
@@ -69,11 +68,29 @@ namespace SlotMachine
                         case "AH":
                             for (int row = 0; row < 3; row++)
                             {
-                                if (rows[row, 0] == rows[row, 1] &&
-                                    rows[row, 1] == rows[row, 2])
+                                if (rows[0, 0] == rows[0, 1] &&
+                                    rows[0, 1] == rows[0, 2] &&
+                                    rows[1, 0] == rows[1, 1] &&
+                                    rows[1, 0] == rows[1, 2] &&
+                                    rows[2, 0] == rows[2, 1] &&
+                                    rows[2, 1] == rows[2, 2])
                                 {
-                                    //do something (add 2 coins to your winning)
-                                    Winnings = (Wager * Odds) + 1;
+                                    Winnings = (Wager * Odds * TrioCombo) + 1;
+                                }
+                            }
+                            InvalidInput = false;
+                            break;
+                        case "TH":
+                            for (int row = 0; row < 3; row++)
+                            {
+                                if (rows[0, 0] == rows[0, 1] &&
+                                     rows[0, 1] == rows[0, 2] ||
+                                     rows[1, 0] == rows[1, 1] &&
+                                     rows[1, 1] == rows[1, 2] ||
+                                     rows[2, 0] == rows[2, 1] &&
+                                     rows[2, 1] == rows[2, 2])
+                                {
+                                    Winnings = (Wager * Odds * DuoCombo) + 1;
                                 }
                             }
                             InvalidInput = false;
