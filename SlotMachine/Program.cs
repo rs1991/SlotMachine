@@ -7,17 +7,19 @@ namespace SlotMachine
         static void Main(string[] args)
         {
             double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
-            bool PlayAgain = true;
-
+            
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the slot machine!");
             Console.WriteLine("----------------------------");
 
             //Random number generator
             Random rng = new Random();
+            int max = 9;
 
             //Grid array
             int[,] rows = new int[3, 3];
+            
+            bool PlayAgain = true;
 
             while (PlayAgain)
             {
@@ -33,20 +35,23 @@ namespace SlotMachine
                     UserWager = Console.ReadLine();
                 }
 
+              
                 //Grid to generate random numbers
                 for (int row = 0; row < 3; row++)
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                       rows[row, col] = rng.Next(9);
+                       rows[row, col] = rng.Next(max+1);
                     }
                 }
+
 
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
                     Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines: ");
                     var LineToPlay = Console.ReadLine().ToUpper();
+                    InvalidInput = false;
                     switch (LineToPlay)
                     {
                         case "T":
@@ -55,7 +60,6 @@ namespace SlotMachine
                             {
                                 Winnings = (Wager * Odds) + 1;
                             }
-                            InvalidInput = false;
                             break;
                         case "C":
                             if (rows[1, 0] == rows[1, 1] &&
@@ -63,7 +67,6 @@ namespace SlotMachine
                             {
                                 Winnings = (Wager * Odds) + 1;
                             }
-                            InvalidInput = false;
                             break;
                         case "AH":
                             for (int row = 0; row < 3; row++)
@@ -78,7 +81,6 @@ namespace SlotMachine
                                     Winnings = (Wager * Odds * TrioCombo) + 1;
                                 }
                             }
-                            InvalidInput = false;
                             break;
                         case "TH":
                             for (int row = 0; row < 3; row++)
@@ -93,7 +95,6 @@ namespace SlotMachine
                                     Winnings = (Wager * Odds * DuoCombo) + 1;
                                 }
                             }
-                            InvalidInput = false;
                             break;
                         case "AV":
                             for (int i = 0; i < 3; i++)
@@ -106,12 +107,10 @@ namespace SlotMachine
                                         rows[0, 2] == rows[1, 2] &&
                                         rows[1, 2] == rows[2, 2])
                                     {
-                                        //do something (add 2 coins to your winning)
-                                        Winnings = (Wager * Odds) + 2;
+                                        Winnings = (Wager * Odds * TrioCombo) + 1;
                                     }
                                 }
                             }
-                            InvalidInput = false;
                             break;
                         case "D":
                             for (int i = 0; i < 3; i++)
@@ -127,7 +126,6 @@ namespace SlotMachine
                                     }
                                 }
                             }
-                            InvalidInput = false;
                             break;
                         default:
                             InvalidInput = true;
@@ -156,15 +154,8 @@ namespace SlotMachine
                 string Answer = "";
                 Console.Write("Do you want to play again: ");
                 Answer = Console.ReadLine().ToUpper();
-
-                if (Answer == "Y")
-                {
-                    PlayAgain = true;
-                }
-                else
-                {
-                    PlayAgain = false;
-                }
+                
+                PlayAgain = (Answer == "Y");
             }
             Console.WriteLine("Thanks for playing");
             Console.ReadKey();
