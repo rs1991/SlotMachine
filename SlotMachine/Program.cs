@@ -41,7 +41,7 @@ namespace SlotMachine
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                       rows[row, col] = rng.Next(max+1);
+                        rows[row, col] = rng.Next(max+1);
                     }
                 }
 
@@ -117,10 +117,17 @@ namespace SlotMachine
                             {
                                 for (int j = 0; j < 3; j++)
                                 {
-                                    if (rows[0, 0] == rows[1, 1] &&
-                                        rows[1, 1] == rows[2, 2]||
+                                    if (rows[0,0] == rows[1, 1]&&
+                                        rows[1,1] == rows[2, 2]&&
                                         rows[2,0] == rows[1, 1]&&
                                         rows[1,1] == rows[0,2])
+                                    {
+                                        Winnings = (Wager * Odds * DuoCombo) + 1;
+                                    }
+                                    else if (rows[0, 0] == rows[1, 1] &&
+                                        rows[1, 1] == rows[2, 2] ||
+                                        rows[2, 0] == rows[1, 1] &&
+                                        rows[1, 1] == rows[0, 2])
                                     {
                                         Winnings = (Wager * Odds) + 1;
                                     }
