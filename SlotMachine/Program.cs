@@ -7,7 +7,7 @@ namespace SlotMachine
         static void Main(string[] args)
         {
             double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
-            
+
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the slot machine!");
             Console.WriteLine("----------------------------");
@@ -17,13 +17,13 @@ namespace SlotMachine
             int max = 9;
 
             //Grid array
-            int[,] rows = new int[3, 3];
-            
+            int[,] Grid = new int[3, 3];
+
             bool PlayAgain = true;
 
             while (PlayAgain)
             {
-                
+
                 Console.WriteLine("----------------");
                 Console.Write("Place your wager: $ ");
                 var UserWager = Console.ReadLine();
@@ -35,17 +35,15 @@ namespace SlotMachine
                     UserWager = Console.ReadLine();
                 }
 
-              
                 //Grid to generate random numbers
                 for (int row = 0; row < 3; row++)
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        rows[row, col] = rng.Next(max+1);
+                        Grid[row, col] = rng.Next(max + 1);
                     }
                 }
-
-
+                                
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
@@ -55,83 +53,100 @@ namespace SlotMachine
                     switch (LineToPlay)
                     {
                         case "T":
-                            if (rows[0, 0] == rows[0, 1] &&
-                                rows[0, 1] == rows[0, 2])
+                            int TopRow = 0;
+                            int WinningTopRowCnt = 0;
+                            
+                            for(TopRow = 0; TopRow < 3; TopRow++)
                             {
-                                Winnings = (Wager * Odds) + 1;
-                            }
-                            break;
-                        case "C":
-                            if (rows[1, 0] == rows[1, 1] &&
-                                rows[1, 1] == rows[1, 2])
-                            {
-                                Winnings = (Wager * Odds) + 1;
-                            }
-                            break;
-                        case "AH":
-                            for (int row = 0; row < 3; row++)
-                            {
-                                if (rows[0, 0] == rows[0, 1] &&
-                                    rows[0, 1] == rows[0, 2] &&
-                                    rows[1, 0] == rows[1, 1] &&
-                                    rows[1, 0] == rows[1, 2] &&
-                                    rows[2, 0] == rows[2, 1] &&
-                                    rows[2, 1] == rows[2, 2])
+                                if (Grid[0, 0] == Grid[0, 1] &&
+                                Grid[0, 1] == Grid[0, 2])
                                 {
-                                    Winnings = (Wager * Odds * TrioCombo) + 1;
+                                    WinningTopRowCnt++;
+                                }
+                                if(WinningTopRowCnt == 3)
+                                {
+                                    Winnings = (Wager * Odds) + 1;
                                 }
                             }
                             break;
-                        case "TH":
-                            for (int row = 0; row < 3; row++)
+                        case "C":
+                            int CentralRow = 0;
+                            int CentralWinRowCnt = 0;
+
+                            for(CentralWinRowCnt = 0; CentralWinRowCnt < 3; CentralWinRowCnt++)
                             {
-                                if (rows[0, 0] == rows[0, 1] &&
-                                     rows[0, 1] == rows[0, 2] ||
-                                     rows[1, 0] == rows[1, 1] &&
-                                     rows[1, 1] == rows[1, 2] ||
-                                     rows[2, 0] == rows[2, 1] &&
-                                     rows[2, 1] == rows[2, 2])
+                                if (Grid[1, 0] == Grid[1, 1] &&
+                                Grid[1, 1] == Grid[1, 2])
+                                {
+                                    CentralWinRowCnt++;
+                                }
+                                if(CentralRow == 3)
+                                {
+                                    Winnings = (Wager * Odds) + 1;
+                                }
+                            }                            
+                            break;
+                        case "AH":
+                            int WinningRowcnt = 0;
+                            int SelectedRow = 0;
+                            for(SelectedRow = 0; SelectedRow < 3; SelectedRow++)
+                            {
+                                if(Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 2] == Grid[SelectedRow, 2])
+                                {
+                                    WinningRowcnt++;
+                                }
+                            }
+                            if(WinningRowcnt == 3)
+                            {
+                                Winnings = (Wager * Odds * TrioCombo) + 1;
+                            }
+                            break;
+                        case "TH":
+                            int WinningRowCnt = 0;
+                            int SelectedRw = 0;
+                            for (SelectedRw = 0; SelectedRw < 3; SelectedRw++)
+                            {
+                                if (Grid[SelectedRw, 0] == Grid[SelectedRw, 1] &&
+                                     Grid[SelectedRw, 1] == Grid[SelectedRw, 2])
+                                {
+                                    WinningRowCnt++;
+
+                                }
+                                if(WinningRowCnt == 3)
                                 {
                                     Winnings = (Wager * Odds * DuoCombo) + 1;
                                 }
                             }
                             break;
                         case "AV":
-                            for (int i = 0; i < 3; i++)
+                            int WinningColCnt = 0;
+                            int SelectedCol = 0;
+                            for (SelectedCol = 0; SelectedCol < 3; SelectedCol++)
                             {
-                                for (int j = 0; j < 3; j++)
+                                if (Grid[0,SelectedCol] == Grid[1, SelectedCol] && Grid[1, SelectedCol] == Grid[2, SelectedCol])
+                                   {
+                                    WinningColCnt++;
+                                   }
+                                if (WinningColCnt == 3)
                                 {
-                                    if (rows[0, 0] == rows[1, 0] &&
-                                        rows[0, 1] == rows[1, 1] &&
-                                        rows[1, 1] == rows[2, 1] &&
-                                        rows[0, 2] == rows[1, 2] &&
-                                        rows[1, 2] == rows[2, 2])
-                                    {
-                                        Winnings = (Wager * Odds * TrioCombo) + 1;
-                                    }
+                                    Winnings = (Wager * Odds * TrioCombo) + 1;
                                 }
                             }
                             break;
                         case "D":
-                            for (int i = 0; i < 3; i++)
+                            int WinningDiagCnt = 0;
+                            int SelectedDiag = 0;
+                            for (SelectedDiag = 0; SelectedDiag < 3; SelectedDiag++)
                             {
-                                for (int j = 0; j < 3; j++)
-                                {
-                                    if (rows[0,0] == rows[1, 1]&&
-                                        rows[1,1] == rows[2, 2]&&
-                                        rows[2,0] == rows[1, 1]&&
-                                        rows[1,1] == rows[0,2])
+                                    if (Grid[SelectedDiag, 0] == Grid[SelectedDiag, 1] &&
+                                        Grid[SelectedDiag, 1] == Grid[SelectedDiag, 2])
                                     {
-                                        Winnings = (Wager * Odds * DuoCombo) + 1;
+                                        WinningDiagCnt++;
                                     }
-                                    else if (rows[0, 0] == rows[1, 1] &&
-                                        rows[1, 1] == rows[2, 2] ||
-                                        rows[2, 0] == rows[1, 1] &&
-                                        rows[1, 1] == rows[0, 2])
+                                    if(WinningDiagCnt == 3)
                                     {
-                                        Winnings = (Wager * Odds) + 1;
+                                        Winnings = (Wager * Odds * TrioCombo) + 1;
                                     }
-                                }
                             }
                             break;
                         default:
@@ -149,7 +164,7 @@ namespace SlotMachine
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        Console.Write("{0}\t", rows[row, col]);
+                        Console.Write("{0}\t", Grid[row, col]);
                     }
                     Console.Write("\n");
                 }
@@ -161,8 +176,10 @@ namespace SlotMachine
                 string Answer = "";
                 Console.Write("Do you want to play again: ");
                 Answer = Console.ReadLine().ToUpper();
-                
+
                 PlayAgain = (Answer == "Y");
+
+      
             }
             Console.WriteLine("Thanks for playing");
             Console.ReadKey();
