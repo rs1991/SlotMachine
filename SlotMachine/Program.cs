@@ -43,7 +43,7 @@ namespace SlotMachine
                         Grid[row, col] = rng.Next(max + 1);
                     }
                 }
-                                
+
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
@@ -55,15 +55,15 @@ namespace SlotMachine
                         case "T":
                             int TopRow = 0;
                             int WinningTopRowCnt = 0;
-                            
-                            for(TopRow = 0; TopRow < 3; TopRow++)
+
+                            for (TopRow = 0; TopRow < 3; TopRow++)
                             {
                                 if (Grid[0, 0] == Grid[0, 1] &&
                                 Grid[0, 1] == Grid[0, 2])
                                 {
                                     WinningTopRowCnt++;
                                 }
-                                if(WinningTopRowCnt == 3)
+                                if (WinningTopRowCnt == 3)
                                 {
                                     Winnings = (Wager * Odds) + 1;
                                 }
@@ -73,30 +73,30 @@ namespace SlotMachine
                             int CentralRow = 0;
                             int CentralWinRowCnt = 0;
 
-                            for(CentralWinRowCnt = 0; CentralWinRowCnt < 3; CentralWinRowCnt++)
+                            for (CentralWinRowCnt = 0; CentralWinRowCnt < 3; CentralWinRowCnt++)
                             {
                                 if (Grid[1, 0] == Grid[1, 1] &&
                                 Grid[1, 1] == Grid[1, 2])
                                 {
                                     CentralWinRowCnt++;
                                 }
-                                if(CentralRow == 3)
+                                if (CentralRow == 3)
                                 {
                                     Winnings = (Wager * Odds) + 1;
                                 }
-                            }                            
+                            }
                             break;
                         case "AH":
                             int WinningRowcnt = 0;
                             int SelectedRow = 0;
-                            for(SelectedRow = 0; SelectedRow < 3; SelectedRow++)
+                            for (SelectedRow = 0; SelectedRow < 3; SelectedRow++)
                             {
-                                if(Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 2] == Grid[SelectedRow, 2])
+                                if (Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 2] == Grid[SelectedRow, 2])
                                 {
                                     WinningRowcnt++;
                                 }
                             }
-                            if(WinningRowcnt == 3)
+                            if (WinningRowcnt == 3)
                             {
                                 Winnings = (Wager * Odds * TrioCombo) + 1;
                             }
@@ -112,7 +112,7 @@ namespace SlotMachine
                                     WinningRowCnt++;
 
                                 }
-                                if(WinningRowCnt == 3)
+                                if (WinningRowCnt == 3)
                                 {
                                     Winnings = (Wager * Odds * DuoCombo) + 1;
                                 }
@@ -123,10 +123,10 @@ namespace SlotMachine
                             int SelectedCol = 0;
                             for (SelectedCol = 0; SelectedCol < 3; SelectedCol++)
                             {
-                                if (Grid[0,SelectedCol] == Grid[1, SelectedCol] && Grid[1, SelectedCol] == Grid[2, SelectedCol])
-                                   {
+                                if (Grid[0, SelectedCol] == Grid[1, SelectedCol] && Grid[1, SelectedCol] == Grid[2, SelectedCol])
+                                {
                                     WinningColCnt++;
-                                   }
+                                }
                                 if (WinningColCnt == 3)
                                 {
                                     Winnings = (Wager * Odds * TrioCombo) + 1;
@@ -138,15 +138,15 @@ namespace SlotMachine
                             int SelectedDiag = 0;
                             for (SelectedDiag = 0; SelectedDiag < 3; SelectedDiag++)
                             {
-                                    if (Grid[SelectedDiag, 0] == Grid[SelectedDiag, 1] &&
-                                        Grid[SelectedDiag, 1] == Grid[SelectedDiag, 2])
-                                    {
-                                        WinningDiagCnt++;
-                                    }
-                                    if(WinningDiagCnt == 3)
-                                    {
-                                        Winnings = (Wager * Odds * TrioCombo) + 1;
-                                    }
+                                if (Grid[SelectedDiag, 0] == Grid[SelectedDiag, 1] &&
+                                    Grid[SelectedDiag, 1] == Grid[SelectedDiag, 2])
+                                {
+                                    WinningDiagCnt++;
+                                }
+                                if (WinningDiagCnt == 3)
+                                {
+                                    Winnings = (Wager * Odds * TrioCombo) + 1;
+                                }
                             }
                             break;
                         default:
@@ -177,24 +177,12 @@ namespace SlotMachine
                 Console.Write("Do you want to play again: ");
                 Answer = Console.ReadLine().ToUpper();
 
-                //PlayAgain = (Answer == "Y");
-                PlayAgain = false;
-                if(Answer == "Y")
-                {
-                    PlayAgain = true;
-                }
-                else if (Answer == "N")
-                {
-                    PlayAgain= false;
-                }
-                else
-                {
-                    Console.WriteLine("Please select Y to play on and N to stop playing");
-                }
-
+                PlayAgain = (Answer == "Y");
+               
+             }
+                            
+                Console.WriteLine("Thanks for playing");
+                Console.ReadKey();
             }
-            Console.WriteLine("Thanks for playing");
-            Console.ReadKey();
         }
     }
-}
