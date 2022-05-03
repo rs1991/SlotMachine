@@ -177,9 +177,21 @@ namespace SlotMachine
                 Console.Write("Do you want to play again: ");
                 Answer = Console.ReadLine().ToUpper();
 
-                PlayAgain = (Answer == "Y");
+                //PlayAgain = (Answer == "Y");
+                PlayAgain = false;
+                if(Answer == "Y")
+                {
+                    PlayAgain = true;
+                }
+                else if (Answer == "N")
+                {
+                    PlayAgain= false;
+                }
+                else
+                {
+                    Console.WriteLine("Please select Y to play on and N to stop playing");
+                }
 
-      
             }
             Console.WriteLine("Thanks for playing");
             Console.ReadKey();
