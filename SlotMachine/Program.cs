@@ -40,7 +40,7 @@ namespace SlotMachine
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        Grid[row, col] = rng.Next(max + 1);
+                        //Grid[row, col] = rng.Next(max + 1);
                     }
                 }
 
@@ -50,6 +50,7 @@ namespace SlotMachine
                     Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines: ");
                     var LineToPlay = Console.ReadLine().ToUpper();
                     InvalidInput = false;
+                    
                     switch (LineToPlay)
                     {
                         case "T":
@@ -65,7 +66,12 @@ namespace SlotMachine
                                 }
                                 if (WinningTopRowCnt == 3)
                                 {
-                                    Winnings = (Wager * Odds) + 1;
+                                    //Winnings = (Wager * Odds) + 1;
+                                    
+                                    //double test = CalculateWinnings(Wager, Odds);
+                                    //Console.WriteLine(test);
+
+
                                 }
                             }
                             break;
@@ -168,9 +174,12 @@ namespace SlotMachine
                     }
                     Console.Write("\n");
                 }
+                                              
 
                 Console.WriteLine("\n-------------------------------------");
-                Console.WriteLine("Here are your winnings: $ " + Winnings);
+                //Console.WriteLine("Here are your winnings: $ " + Winnings);
+                double test = CalculateWinnings(Wager, Odds);
+                Console.WriteLine("Here's what you've won $ " + test);
                 Console.WriteLine("--------------------------------------");
 
                 string Answer = "";
@@ -184,5 +193,30 @@ namespace SlotMachine
                 Console.WriteLine("Thanks for playing");
                 Console.ReadKey();
             }
+
+        void PrintSlotMachine(int[,] arr)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    Console.Write("{0}\t", arr);
+                }
+                Console.Write("\n");
+            }
         }
+
+        static double CalculateWinnings(double Bet, double Odd)
+        {
+            double Total = 0;
+            Total = Bet * Odd;  
+            return Total;
+        }
+
+        
+
+        
+    }
+
+    
     }
