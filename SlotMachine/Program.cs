@@ -40,7 +40,7 @@ namespace SlotMachine
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        //Grid[row, col] = rng.Next(max + 1);
+                        Grid[row, col] = rng.Next(max + 1);
                     }
                 }
 
@@ -56,7 +56,6 @@ namespace SlotMachine
                         case "T":
                             int TopRow = 0;
                             int WinningTopRowCnt = 0;
-
                             for (TopRow = 0; TopRow < 3; TopRow++)
                             {
                                 if (Grid[0, 0] == Grid[0, 1] &&
@@ -66,19 +65,13 @@ namespace SlotMachine
                                 }
                                 if (WinningTopRowCnt == 3)
                                 {
-                                    //Winnings = (Wager * Odds) + 1;
-                                    
-                                    //double test = CalculateWinnings(Wager, Odds);
-                                    //Console.WriteLine(test);
-
-
+                                    Winnings = CalculateWinningsT(Wager, Odds);
                                 }
                             }
                             break;
                         case "C":
                             int CentralRow = 0;
                             int CentralWinRowCnt = 0;
-
                             for (CentralWinRowCnt = 0; CentralWinRowCnt < 3; CentralWinRowCnt++)
                             {
                                 if (Grid[1, 0] == Grid[1, 1] &&
@@ -88,7 +81,7 @@ namespace SlotMachine
                                 }
                                 if (CentralRow == 3)
                                 {
-                                    Winnings = (Wager * Odds) + 1;
+                                    Winnings = CalculateWinningsC(Wager, Odds);
                                 }
                             }
                             break;
@@ -104,7 +97,7 @@ namespace SlotMachine
                             }
                             if (WinningRowcnt == 3)
                             {
-                                Winnings = (Wager * Odds * TrioCombo) + 1;
+                                Winnings = CalculateWinningsAH(Wager, Odds, TrioCombo);
                             }
                             break;
                         case "TH":
@@ -116,11 +109,10 @@ namespace SlotMachine
                                      Grid[SelectedRw, 1] == Grid[SelectedRw, 2])
                                 {
                                     WinningRowCnt++;
-
                                 }
                                 if (WinningRowCnt == 3)
                                 {
-                                    Winnings = (Wager * Odds * DuoCombo) + 1;
+                                    Winnings = CalculateWinningsTH(Wager, Odds, DuoCombo);
                                 }
                             }
                             break;
@@ -135,7 +127,7 @@ namespace SlotMachine
                                 }
                                 if (WinningColCnt == 3)
                                 {
-                                    Winnings = (Wager * Odds * TrioCombo) + 1;
+                                    Winnings = CalculateWinningsAV(Wager, Odds, TrioCombo);
                                 }
                             }
                             break;
@@ -151,7 +143,7 @@ namespace SlotMachine
                                 }
                                 if (WinningDiagCnt == 3)
                                 {
-                                    Winnings = (Wager * Odds * TrioCombo) + 1;
+                                    Winnings = CalculateWinningsD(Wager, Odds, TrioCombo);
                                 }
                             }
                             break;
@@ -177,9 +169,7 @@ namespace SlotMachine
                                               
 
                 Console.WriteLine("\n-------------------------------------");
-                //Console.WriteLine("Here are your winnings: $ " + Winnings);
-                double test = CalculateWinnings(Wager, Odds);
-                Console.WriteLine("Here's what you've won $ " + test);
+                Console.WriteLine("Here are your winnings: $ " + Winnings);
                 Console.WriteLine("--------------------------------------");
 
                 string Answer = "";
@@ -206,17 +196,52 @@ namespace SlotMachine
             }
         }
 
-        static double CalculateWinnings(double Bet, double Odd)
+        //Calculates winnings for option T
+        static double CalculateWinningsT(double Bet, double Odd)
         {
             double Total = 0;
-            Total = Bet * Odd;  
+            Total = Bet * Odd + 1;  
             return Total;
         }
 
-        
+        //Calculates winnings for option C
+        static double CalculateWinningsC(double Bet, double Odd)
+        {
+            double Total = 0;
+            Total = Bet * Odd + 1;
+            return Total;
+        }
 
-        
-    }
+        //Calculates winnings for AH option
+        static double CalculateWinningsAH(double Bet, double Odd, double Trio)
+        {
+            double Total = 0;
+            Total = Bet * Odd * Trio + 1;
+            return Total;
+        }
 
-    
+        //Calculates winnings for TH option
+        static double CalculateWinningsTH(double Bet, double Odd, double Duo)
+        {
+            double Total = 0;
+            Total = Bet * Odd * Duo + 1;
+            return Total;
+        }
+
+        //Calculates winnings for AV option
+        static double CalculateWinningsAV(double Bet, double Odd, double Trio)
+        {
+            double Total = 0;
+            Total = Bet * Odd * Trio + 1;
+            return Total;
+        }
+
+        //calculates winning for D option
+        static double CalculateWinningsD(double Bet, double Odd, double Trio)
+        {
+            double Total = 0;
+            Total = Bet * Odd * Trio + 1;
+            return Total;
+        }
     }
+}
