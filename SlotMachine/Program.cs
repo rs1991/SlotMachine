@@ -10,7 +10,7 @@ namespace SlotMachine
 
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the slot machine!");
-            Console.WriteLine("----------------------------");
+            Console.WriteLine("---------------------");
 
             //Random number generator
             Random rng = new Random();
@@ -23,8 +23,7 @@ namespace SlotMachine
 
             while (PlayAgain)
             {
-
-                Console.WriteLine("----------------");
+                                
                 Console.Write("Place your wager: $ ");
                 var UserWager = Console.ReadLine();
 
@@ -156,18 +155,10 @@ namespace SlotMachine
                         Console.WriteLine("Valid input please");
                     }
                 }
+                             
+                //Display the grid
+                DisplaySlotMatrix(Grid);
 
-                //display grid and winnings
-                for (int row = 0; row < 3; row++)
-                {
-                    for (int col = 0; col < 3; col++)
-                    {
-                        Console.Write("{0}\t", Grid[row, col]);
-                    }
-                    Console.Write("\n");
-                }
-
-               
                 Console.WriteLine("\n-------------------------------------");
                 Console.WriteLine("Here are your winnings: $ " + Winnings);
                 Console.WriteLine("--------------------------------------");
@@ -189,8 +180,24 @@ namespace SlotMachine
             Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines:");
         }
 
-        //Methods to calculate winnings
-        static double CalculateWinningsT(double Bet, double Odd)
+        static void DisplaySlotMatrix(int[,] Grid1)
+        {
+            int[,] Grid = new int[3, 3];
+
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    Console.Write("{0}\t", Grid1[row, col]);
+                }
+                Console.Write("\n");
+            }
+
+        }
+        
+
+//Methods to calculate winnings
+static double CalculateWinningsT(double Bet, double Odd)
         {
             double Total = 0;
             Total = Bet * Odd + 1;  
