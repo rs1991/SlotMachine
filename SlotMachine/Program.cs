@@ -40,15 +40,17 @@ namespace SlotMachine
                 {
                     for (int col = 0; col < 3; col++)
                     {
-                        Grid[row, col] = rng.Next(max + 1);
+                     Grid[row, col] = rng.Next(max + 1);
                     }
                 }
 
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
-                    Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines: ");
+                    LineToP();
                     var LineToPlay = Console.ReadLine().ToUpper();
+
+
                     InvalidInput = false;
                     
                     switch (LineToPlay)
@@ -58,8 +60,7 @@ namespace SlotMachine
                             int WinningTopRowCnt = 0;
                             for (TopRow = 0; TopRow < 3; TopRow++)
                             {
-                                if (Grid[0, 0] == Grid[0, 1] &&
-                                Grid[0, 1] == Grid[0, 2])
+                                if(Grid[TopRow, 0] == Grid[TopRow, 1] && Grid[TopRow, 1] == Grid[TopRow, 2])
                                 {
                                     WinningTopRowCnt++;
                                 }
@@ -74,12 +75,11 @@ namespace SlotMachine
                             int CentralWinRowCnt = 0;
                             for (CentralWinRowCnt = 0; CentralWinRowCnt < 3; CentralWinRowCnt++)
                             {
-                                if (Grid[1, 0] == Grid[1, 1] &&
-                                Grid[1, 1] == Grid[1, 2])
+                                if(Grid[1, CentralRow] == Grid[CentralRow, 1] && Grid[CentralRow, 1] == Grid[CentralRow, 2])
                                 {
                                     CentralWinRowCnt++;
                                 }
-                                if (CentralRow == 3)
+                                if(CentralWinRowCnt == 3)
                                 {
                                     Winnings = CalculateWinningsC(Wager, Odds);
                                 }
@@ -166,8 +166,8 @@ namespace SlotMachine
                     }
                     Console.Write("\n");
                 }
-                                              
 
+               
                 Console.WriteLine("\n-------------------------------------");
                 Console.WriteLine("Here are your winnings: $ " + Winnings);
                 Console.WriteLine("--------------------------------------");
@@ -184,27 +184,19 @@ namespace SlotMachine
                 Console.ReadKey();
             }
 
-        void PrintSlotMachine(int[,] arr)
+        static void LineToP()
         {
-            for (int row = 0; row < 3; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    Console.Write("{0}\t", arr);
-                }
-                Console.Write("\n");
-            }
+            Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines:");
         }
 
-        //Calculates winnings for option T
+        //Methods to calculate winnings
         static double CalculateWinningsT(double Bet, double Odd)
         {
             double Total = 0;
             Total = Bet * Odd + 1;  
             return Total;
         }
-
-        //Calculates winnings for option C
+                
         static double CalculateWinningsC(double Bet, double Odd)
         {
             double Total = 0;
@@ -212,31 +204,27 @@ namespace SlotMachine
             return Total;
         }
 
-        //Calculates winnings for AH option
         static double CalculateWinningsAH(double Bet, double Odd, double Trio)
         {
             double Total = 0;
             Total = Bet * Odd * Trio + 1;
             return Total;
         }
-
-        //Calculates winnings for TH option
+                
         static double CalculateWinningsTH(double Bet, double Odd, double Duo)
         {
             double Total = 0;
             Total = Bet * Odd * Duo + 1;
             return Total;
         }
-
-        //Calculates winnings for AV option
+                
         static double CalculateWinningsAV(double Bet, double Odd, double Trio)
         {
             double Total = 0;
             Total = Bet * Odd * Trio + 1;
             return Total;
         }
-
-        //calculates winning for D option
+        
         static double CalculateWinningsD(double Bet, double Odd, double Trio)
         {
             double Total = 0;
