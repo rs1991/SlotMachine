@@ -180,7 +180,7 @@ namespace SlotMachine
             Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines:");
         }
 
-        static void DisplaySlotMatrix(int[,] Grid1)
+        static void DisplaySlotMatrix(int[,] Matrix)
         {
             int[,] Grid = new int[3, 3];
 
@@ -188,13 +188,12 @@ namespace SlotMachine
             {
                 for (int col = 0; col < 3; col++)
                 {
-                    Console.Write("{0}\t", Grid1[row, col]);
+                    Console.Write("{0}\t", Matrix[row, col]);
                 }
                 Console.Write("\n");
             }
 
-        }
-        
+        }     
 
 //Methods to calculate winnings
 static double CalculateWinningsT(double Bet, double Odd)
