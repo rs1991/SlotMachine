@@ -179,7 +179,7 @@ namespace SlotMachine
         /// The amount of money the user wishes to bet when playing the slot machine
         /// </summary>
         /// <param name="Wager">The amount the user wishes to bet</param>
-        /// <returns></returns>
+        /// <returns>The bet placed by the user</returns>
         static double PlaceBet(double Wager)
         {
             Console.Write("Place your wager: $ ");
