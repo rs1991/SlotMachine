@@ -7,8 +7,8 @@ namespace SlotMachine
         static void Main(string[] args)
         {
             double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
-            double Wager =0;
-                       
+            double Wager = 0;
+
             WelcomeMessage();
 
             //Random number generator
@@ -22,7 +22,8 @@ namespace SlotMachine
 
             while (PlayAgain)
             {
-                
+
+                /*
                 Console.Write("Place your wager: $ ");
                 var UserWager = Console.ReadLine();
 
@@ -32,7 +33,10 @@ namespace SlotMachine
                     Console.Write("Please insert a valid number to continue: $ ");
                     UserWager = Console.ReadLine();
                 }
-                              
+                */
+
+                PlaceBet();
+
                 //Grid to generate random numbers
                 for (int row = 0; row < 3; row++)
                 {
@@ -45,9 +49,9 @@ namespace SlotMachine
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
-                   DisplayOptions();
-                   var LineToPlay = Console.ReadLine().ToUpper();
-                   
+                    DisplayOptions();
+                    var LineToPlay = Console.ReadLine().ToUpper();
+
                     InvalidInput = false;
 
                     switch (LineToPlay)
@@ -139,10 +143,8 @@ namespace SlotMachine
                 //Display the grid
                 DisplaySlotMatrix(Grid);
 
-                Console.WriteLine("\n-------------------------------------");
-                Console.WriteLine("Here are your winnings: $ " + Winnings);
-                Console.WriteLine("--------------------------------------");
-                
+                WinTotal(Winnings);
+
                 string Answer = "";
 
                 PlayMore(Answer);
@@ -150,6 +152,21 @@ namespace SlotMachine
 
             }
             EndMessage();
+        }
+
+        static void PlaceBet()
+        {
+            double Wager = 0;
+                Console.Write("Place your wager: $ ");
+                var UserWager = Console.ReadLine();
+
+                //double Wager;
+                while (!double.TryParse(UserWager, out Wager) || Wager < 0)
+                {
+                    Console.Write("Please insert a valid number to continue: $ ");
+                    UserWager = Console.ReadLine();
+                }
+                
         }
 
         /// <summary>
@@ -193,6 +210,17 @@ namespace SlotMachine
             return Wager;
         }
 
+        static double WinTotal(double WinningTotal)
+        {
+            
+            Console.WriteLine("\n-------------------------------------");
+            Console.WriteLine("Here are your winnings: $ " + WinningTotal);
+            Console.WriteLine("--------------------------------------");
+
+            return WinningTotal;
+
+        }
+                
         /// <summary>
         /// Makes sure that the user selects one of the listed game options
         /// </summary>
