@@ -22,19 +22,7 @@ namespace SlotMachine
 
             while (PlayAgain)
             {
-
-                /*
-                Console.Write("Place your wager: $ ");
-                var UserWager = Console.ReadLine();
-
-                //double Wager;
-                while (!double.TryParse(UserWager, out Wager) || Wager < 0)
-                {
-                    Console.Write("Please insert a valid number to continue: $ ");
-                    UserWager = Console.ReadLine();
-                }
-                */
-
+                                
                 PlaceBet();
 
                 //Grid to generate random numbers
