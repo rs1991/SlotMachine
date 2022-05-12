@@ -22,7 +22,7 @@ namespace SlotMachine
 
             while (PlayAgain)
             {
-                                
+
                 PlaceBet();
 
                 //Grid to generate random numbers
@@ -37,6 +37,7 @@ namespace SlotMachine
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
+
                     DisplayOptions();
                     var LineToPlay = Console.ReadLine().ToUpper();
 
@@ -68,7 +69,7 @@ namespace SlotMachine
                             }
                             if (WinningRowcnt == 3)
                             {
-                                Winnings = CalculateWinningsAH(Wager, Odds, TrioCombo);
+                                Winnings = CalculateWinningsTriple(Wager, Odds, TrioCombo);
                             }
                             break;
                         case "TH":
@@ -83,7 +84,7 @@ namespace SlotMachine
                                 }
                                 if (WinningRowCnt == 3)
                                 {
-                                    Winnings = CalculateWinningsTH(Wager, Odds, DuoCombo);
+                                    Winnings = CalculateWinningsDouble(Wager, Odds, DuoCombo);
                                 }
                             }
                             break;
@@ -98,7 +99,7 @@ namespace SlotMachine
                                 }
                                 if (WinningColCnt == 3)
                                 {
-                                    Winnings = CalculateWinningsAV(Wager, Odds, TrioCombo);
+                                    Winnings = CalculateWinningsTriple(Wager, Odds, TrioCombo);
                                 }
                             }
                             break;
@@ -114,7 +115,7 @@ namespace SlotMachine
                                 }
                                 if (WinningDiagCnt == 3)
                                 {
-                                    Winnings = CalculateWinningsD(Wager, Odds, TrioCombo);
+                                    Winnings = CalculateWinningsDouble(Wager, Odds, TrioCombo);
                                 }
                             }
                             break;
@@ -130,12 +131,13 @@ namespace SlotMachine
 
                 //Display the grid
                 DisplaySlotMatrix(Grid);
-
                 WinTotal(Winnings);
 
                 string Answer = "";
 
-                PlayMore(Answer);
+                Console.Write("Do you want to play again: ");
+                Answer = Console.ReadLine().ToUpper();
+
                 PlayAgain = (Answer == "Y");
 
             }
@@ -145,16 +147,16 @@ namespace SlotMachine
         static void PlaceBet()
         {
             double Wager = 0;
-                Console.Write("Place your wager: $ ");
-                var UserWager = Console.ReadLine();
+            Console.Write("Place your wager: $ ");
+            var UserWager = Console.ReadLine();
 
-                //double Wager;
-                while (!double.TryParse(UserWager, out Wager) || Wager < 0)
-                {
-                    Console.Write("Please insert a valid number to continue: $ ");
-                    UserWager = Console.ReadLine();
-                }
-                
+            //double Wager;
+            while (!double.TryParse(UserWager, out Wager) || Wager < 0)
+            {
+                Console.Write("Please insert a valid number to continue: $ ");
+                UserWager = Console.ReadLine();
+            }
+
         }
 
         /// <summary>
@@ -167,18 +169,6 @@ namespace SlotMachine
             Console.WriteLine("----------------------------");
         }
 
-        /// <summary>
-        /// This method asks the user if they wish to play again after placing first bet
-        /// </summary>
-        /// <param name="Response">Does the user want to play again? Yes or No</param>
-        /// <returns></returns>
-        static string PlayMore(string Response)
-        {
-            string Answer = "";
-            Console.Write("Do you want to play again: ");
-            Response = Console.ReadLine().ToUpper();
-            return Answer;
-        }
 
         /// <summary>
         /// The amount of money the user wishes to bet when playing the slot machine
@@ -200,7 +190,7 @@ namespace SlotMachine
 
         static double WinTotal(double WinningTotal)
         {
-            
+
             Console.WriteLine("\n-------------------------------------");
             Console.WriteLine("Here are your winnings: $ " + WinningTotal);
             Console.WriteLine("--------------------------------------");
@@ -208,7 +198,7 @@ namespace SlotMachine
             return WinningTotal;
 
         }
-                
+
         /// <summary>
         /// Makes sure that the user selects one of the listed game options
         /// </summary>
@@ -274,7 +264,7 @@ namespace SlotMachine
         /// <param name="Trio">All three lines are played so winning are tripled</param>
         /// <returns>The winnings from when the user plays all the horizontal options</returns>
 
-        static double CalculateWinningsAH(double Bet, double Odd, double Trio)
+        static double CalculateWinningsTriple(double Bet, double Odd, double Trio)
         {
             double Total = 0;
             Total = Bet * Odd * Trio + 1;
@@ -289,37 +279,7 @@ namespace SlotMachine
         /// <param name="Duo">Two horizontal lines are played so winning are doubled</param>
         /// <returns>The winnings from when the user plays the two horizontal options</returns>
 
-        static double CalculateWinningsTH(double Bet, double Odd, double Duo)
-        {
-            double Total = 0;
-            Total = Bet * Odd * Duo + 1;
-            return Total;
-        }
-
-        /// <summary>
-        /// Calculates the winnings if user chooses to play all vertical lines
-        /// </summary>
-        /// <param name="Bet">The bet the user places</param>
-        /// <param name="Odd">The odds calculation if the user wins</param>
-        /// <param name="Trio">Three vertical lines are played so winnings are tripled</param>
-        /// <returns>The winnings for when the user plays all three vertical options</returns>
-
-        static double CalculateWinningsAV(double Bet, double Odd, double Trio)
-        {
-            double Total = 0;
-            Total = Bet * Odd * Trio + 1;
-            return Total;
-        }
-
-        /// <summary>
-        /// Calculates the winnings for when diagonal lines are played
-        /// </summary>
-        /// <param name="Bet">The bet the user places</param>
-        /// <param name="Odd">The odds calculation if the user wins</param>
-        /// <param name="Duo"></param>
-        /// <returns>The winnings for when user play the diagonal option</returns>
-
-        static double CalculateWinningsD(double Bet, double Odd, double Duo)
+        static double CalculateWinningsDouble(double Bet, double Odd, double Duo)
         {
             double Total = 0;
             Total = Bet * Odd * Duo + 1;
