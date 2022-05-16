@@ -23,7 +23,9 @@ namespace SlotMachine
             while (PlayAgain)
             {
 
-                PlaceBet();
+                // PlaceBet();
+                Wager = GetWager();
+                
 
                 //Grid to generate random numbers
                 for (int row = 0; row < 3; row++)
@@ -37,9 +39,7 @@ namespace SlotMachine
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
-
-                    DisplayOptions();
-                    var LineToPlay = Console.ReadLine().ToUpper();
+                    string LineToPlay = DisplayOptions();
 
                     InvalidInput = false;
 
@@ -69,7 +69,7 @@ namespace SlotMachine
                             }
                             if (WinningRowcnt == 3)
                             {
-                                Winnings = CalculateWinningsTriple(Wager, Odds, TrioCombo);
+                                Winnings = CalculateOtherWinnings(Wager, Odds, TrioCombo);
                             }
                             break;
                         case "TH":
@@ -84,7 +84,7 @@ namespace SlotMachine
                                 }
                                 if (WinningRowCnt == 3)
                                 {
-                                    Winnings = CalculateWinningsDouble(Wager, Odds, DuoCombo);
+                                    Winnings = CalculateOtherWinnings(Wager, Odds, DuoCombo);
                                 }
                             }
                             break;
@@ -99,7 +99,7 @@ namespace SlotMachine
                                 }
                                 if (WinningColCnt == 3)
                                 {
-                                    Winnings = CalculateWinningsTriple(Wager, Odds, TrioCombo);
+                                    Winnings = CalculateOtherWinnings(Wager, Odds, TrioCombo);
                                 }
                             }
                             break;
@@ -115,7 +115,7 @@ namespace SlotMachine
                                 }
                                 if (WinningDiagCnt == 3)
                                 {
-                                    Winnings = CalculateWinningsDouble(Wager, Odds, TrioCombo);
+                                    Winnings = CalculateOtherWinnings(Wager, Odds, TrioCombo);
                                 }
                             }
                             break;
@@ -133,10 +133,7 @@ namespace SlotMachine
                 DisplaySlotMatrix(Grid);
                 WinTotal(Winnings);
 
-                string Answer = "";
-
-                Console.Write("Do you want to play again: ");
-                Answer = Console.ReadLine().ToUpper();
+                string Answer = PlayMore();
 
                 PlayAgain = (Answer == "Y");
 
@@ -144,6 +141,21 @@ namespace SlotMachine
             EndMessage();
         }
 
+        /// <summary>
+        /// Asks user if they want to play again  
+        /// </summary>
+        /// <returns>Restarts the game or ends it depending on the selection</returns>
+        static string PlayMore()
+        {
+            string Answer = "";
+            Console.Write("Do you want to play again [Y or N]: ");
+            Answer = Console.ReadLine().ToUpper();
+            return Answer;
+        } 
+
+        /// <summary>
+        /// Wager/Bet is placed
+        /// </summary>
         static void PlaceBet()
         {
             double Wager = 0;
@@ -188,15 +200,18 @@ namespace SlotMachine
             return Wager;
         }
 
+        /// <summary>
+        /// The total amount of money won is displayed here
+        /// </summary>
+        /// <param name="WinningTotal"></param>
+        /// <returns></returns>
         static double WinTotal(double WinningTotal)
         {
 
             Console.WriteLine("\n-------------------------------------");
             Console.WriteLine("Here are your winnings: $ " + WinningTotal);
             Console.WriteLine("--------------------------------------");
-
             return WinningTotal;
-
         }
 
         /// <summary>
@@ -209,12 +224,14 @@ namespace SlotMachine
 
         /// <summary>
         /// Displays the options that the user can play
-        /// </summary>           
-        static void DisplayOptions()
+        /// </summary>            
+        static string DisplayOptions()
         {
             Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines:");
+            string response = Console.ReadLine().ToUpper();
+            return response;
         }
-
+                
         /// <summary>
         /// Displays a message to thank the user for playing
         /// </summary>
@@ -264,26 +281,20 @@ namespace SlotMachine
         /// <param name="Trio">All three lines are played so winning are tripled</param>
         /// <returns>The winnings from when the user plays all the horizontal options</returns>
 
-        static double CalculateWinningsTriple(double Bet, double Odd, double Trio)
+        static double CalculateOtherWinnings(double Bet, double Odd, double Trio)
         {
             double Total = 0;
             Total = Bet * Odd * Trio + 1;
             return Total;
         }
 
-        /// <summary>
-        /// Calculates the winnings if user chooses to play two horizontal lines
-        /// </summary>
-        /// <param name="Bet">The bet the user places</param>
-        /// <param name="Odd">The odds calculation if the user wins</param>
-        /// <param name="Duo">Two horizontal lines are played so winning are doubled</param>
-        /// <returns>The winnings from when the user plays the two horizontal options</returns>
-
-        static double CalculateWinningsDouble(double Bet, double Odd, double Duo)
+        static double GetWager()
         {
-            double Total = 0;
-            Total = Bet * Odd * Duo + 1;
-            return Total;
+            double Bet = 0;
+            Console.Write("Place your bet: $ ");
+            Bet = double.Parse(Console.ReadLine());
+            return Bet;
         }
+
     }
 }
