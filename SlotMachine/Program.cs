@@ -9,7 +9,7 @@ namespace SlotMachine
             double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
             double Wager = 0;
 
-            WelcomeMessage();
+            UiMethods.WelcomeMessage();
 
             //Random number generator
             Random rng = new Random();
@@ -24,8 +24,8 @@ namespace SlotMachine
             {
 
                 // PlaceBet();
-                Wager = GetWager();
-                
+                Wager = UiMethods.GetWager();
+
 
                 //Grid to generate random numbers
                 for (int row = 0; row < 3; row++)
@@ -170,17 +170,7 @@ namespace SlotMachine
             }
 
         }
-
-        /// <summary>
-        /// This method simply displays the welcome message
-        /// </summary>
-        static void WelcomeMessage()
-        {
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Welcome to the slot machine!");
-            Console.WriteLine("----------------------------");
-        }
-
+                
 
         /// <summary>
         /// The amount of money the user wishes to bet when playing the slot machine
@@ -287,14 +277,6 @@ namespace SlotMachine
             Total = Bet * Odd * Trio + 1;
             return Total;
         }
-
-        static double GetWager()
-        {
-            double Bet = 0;
-            Console.Write("Place your bet: $ ");
-            Bet = double.Parse(Console.ReadLine());
-            return Bet;
-        }
-
+        
     }
 }
