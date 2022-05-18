@@ -23,5 +23,46 @@ namespace SlotMachine
             Bet = double.Parse(Console.ReadLine());
             return Bet;
         }
+
+        public static string DisplayOptions()
+        {
+            Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines:");
+            string response = Console.ReadLine().ToUpper();
+            return response;
+        }
+
+        public static void InValidInput()
+        {
+            Console.WriteLine("Valid input please");
+        }
+
+        public static void DisplaySlotMatrix(int[,] Matrix)
+        {
+            int[,] Grid = new int[3, 3];
+
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    Console.Write("{0}\t", Matrix[row, col]);
+                }
+                Console.Write("\n");
+            }
+
+            }
+        public static string PlayMore()
+        {
+            string Answer = "";
+            Console.Write("Do you want to play again [Y or N]: ");
+            Answer = Console.ReadLine().ToUpper();
+            return Answer;
+
+        }
+
+        public static void EndMessage()
+        {
+            Console.WriteLine("Thanks for playing");
+            Console.ReadKey();
+        }
     }
 }
