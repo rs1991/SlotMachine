@@ -53,13 +53,20 @@ namespace SlotMachine
             }
 
             }
-        public static string PlayMore()
+        public static bool PlayMore()
         {
- 
-            string Answer = "";
+            string Answer;
             Console.WriteLine("Do you want to play again Y or N: ");
             Answer = Console.ReadLine().ToUpper();
-            return Answer;
+            if (Answer == "Y")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+               
+            }
         }
 
         public static double WinTotal(double WinningTotal)
