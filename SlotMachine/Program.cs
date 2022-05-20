@@ -121,12 +121,32 @@ namespace SlotMachine
                 UiMethods.DisplaySlotMatrix(Grid);
                 UiMethods.WinTotal(Winnings);
 
+                if (UiMethods.PlayMore() == true)
+                {
+                    PlayAgain = true;
+                }
+                else
+                {
+                    UiMethods.EndMessage();
+                    break;
+                }
+
+             
+
+                
+                
+
+
+
+                /*
                 if (UiMethods.PlayMore() == false)
                 {
                     UiMethods.EndMessage();
                     break;
                 }
-                }
+                */
+            }
+
         }
         }
     }
