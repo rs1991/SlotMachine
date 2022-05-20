@@ -23,13 +23,23 @@ namespace SlotMachine
             return Total;
         }
 
-        public static double WinTotal(double WinningTotal)
-        {
 
-            Console.WriteLine("\n-------------------------------------");
-            Console.WriteLine("Here are your winnings: $ " + WinningTotal);
-            Console.WriteLine("--------------------------------------");
-            return WinningTotal;
+        public static void GenerateGrid(int[,] Grid)
+        {
+            //Random number generator
+            Random rng = new Random();
+            int max = 9;
+            //Grid array
+            int[,] Grid1 = new int[3, 3];
+            //Grid to generate random numbers
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    Grid[row, col] = rng.Next(max + 1);
+                }
+            }
         }
+
     }
 }

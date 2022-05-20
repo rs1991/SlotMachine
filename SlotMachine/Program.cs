@@ -10,11 +10,7 @@ namespace SlotMachine
             double Wager = 0;
 
             UiMethods.WelcomeMessage();
-
-            //Random number generator
-            Random rng = new Random();
-            int max = 9;
-
+                        
             //Grid array
             int[,] Grid = new int[3, 3];
 
@@ -25,16 +21,8 @@ namespace SlotMachine
 
                 // PlaceBet();
                 Wager = UiMethods.GetWager();
-
-
-                //Grid to generate random numbers
-                for (int row = 0; row < 3; row++)
-                {
-                    for (int col = 0; col < 3; col++)
-                    {
-                        Grid[row, col] = rng.Next(max + 1);
-                    }
-                }
+                            
+                LogicMethods.GenerateGrid(Grid);
 
                 bool InvalidInput = true;
                 while (InvalidInput)
@@ -52,14 +40,14 @@ namespace SlotMachine
                             }
                             break;
                         case "C":
-                            if (Grid[0, 0] == Grid[0, 1] && Grid[0, 1] == Grid[0, 2])
+                            if (Grid[1, 0] == Grid[1, 1] && Grid[1, 1] == Grid[1, 2])
                             {
                                 Winnings = LogicMethods.CalculateSingleLineWinnings(Wager, Odds);
                             }
                             break;
                         case "AH":
                             int WinningRowcnt = 0;
-                            int SelectedRow = 0;
+                            int SelectedRow;
                             for (SelectedRow = 0; SelectedRow < 3; SelectedRow++)
                             {
                                 if (Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 2] == Grid[SelectedRow, 2])
@@ -74,7 +62,7 @@ namespace SlotMachine
                             break;
                         case "TH":
                             int WinningRowCnt = 0;
-                            int SelectedRw = 0;
+                            int SelectedRw;
                             for (SelectedRw = 0; SelectedRw < 3; SelectedRw++)
                             {
                                 if (Grid[SelectedRw, 0] == Grid[SelectedRw, 1] &&
@@ -90,7 +78,7 @@ namespace SlotMachine
                             break;
                         case "AV":
                             int WinningColCnt = 0;
-                            int SelectedCol = 0;
+                            int SelectedCol;
                             for (SelectedCol = 0; SelectedCol < 3; SelectedCol++)
                             {
                                 if (Grid[0, SelectedCol] == Grid[1, SelectedCol] && Grid[1, SelectedCol] == Grid[2, SelectedCol])
@@ -105,7 +93,7 @@ namespace SlotMachine
                             break;
                         case "D":
                             int WinningDiagCnt = 0;
-                            int SelectedDiag = 0;
+                            int SelectedDiag;
                             for (SelectedDiag = 0; SelectedDiag < 3; SelectedDiag++)
                             {
                                 if (Grid[SelectedDiag, 0] == Grid[SelectedDiag, 1] &&
@@ -131,11 +119,13 @@ namespace SlotMachine
 
                 //Display the grid
                 UiMethods.DisplaySlotMatrix(Grid);
-                LogicMethods.WinTotal(Winnings);
+                UiMethods.WinTotal(Winnings);
 
-                string Answer = UiMethods.PlayMore();
+                //string Answer = 
+                    
+                UiMethods.PlayMore();
 
-                PlayAgain = (Answer == "Y");
+                //PlayAgain = (Answer == "Y");
 
             }
             UiMethods.EndMessage();

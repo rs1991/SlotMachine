@@ -20,7 +20,10 @@ namespace SlotMachine
         {
             double Bet = 0;
             Console.Write("Place your bet: $ ");
-            Bet = double.Parse(Console.ReadLine());
+            while(!double.TryParse(Console.ReadLine(), out Bet))
+            {
+                Console.Write("Invalid number, please insert a valid number: $ ");
+            }
             return Bet;
         }
 
@@ -52,11 +55,20 @@ namespace SlotMachine
             }
         public static string PlayMore()
         {
+ 
             string Answer = "";
-            Console.Write("Do you want to play again [Y or N]: ");
+            Console.WriteLine("Do you want to play again Y or N: ");
             Answer = Console.ReadLine().ToUpper();
             return Answer;
+        }
 
+        public static double WinTotal(double WinningTotal)
+        {
+
+            Console.WriteLine("\n-------------------------------------");
+            Console.WriteLine("Here are your winnings: $ " + WinningTotal);
+            Console.WriteLine("--------------------------------------");
+            return WinningTotal;
         }
 
         public static void EndMessage()
