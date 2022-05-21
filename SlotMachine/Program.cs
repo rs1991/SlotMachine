@@ -130,21 +130,6 @@ namespace SlotMachine
                     UiMethods.EndMessage();
                     break;
                 }
-
-             
-
-                
-                
-
-
-
-                /*
-                if (UiMethods.PlayMore() == false)
-                {
-                    UiMethods.EndMessage();
-                    break;
-                }
-                */
             }
 
         }
