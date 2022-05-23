@@ -26,19 +26,19 @@ namespace SlotMachine
         /// </summary>
         /// <param name="Bet">The bet that the user places</param>
         /// <param name="Odd">The odds added to the equation if user wins</param>
-        /// <param name="Trio">Triple winnings for when three lines have matching numbers</param>
+        /// <param name="TrioCombo">TrioCombo used when there are three winning lines</param>
         /// <returns>The winnings for when three lines are played</returns>
-        public static double CalculateTripleLineWinnings(double Bet, double Odd, double Trio)
+        public static double CalculateTripleLineWinnings(double Bet, double Odd, double TrioCombo)
         {
             double Total;
-            Total = Bet * Odd * Trio + 1;
+            Total = Bet * Odd * TrioCombo + 1;
             return Total;
         }
 
         /// <summary>
         /// Generates the random grid
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Randomly generated grid</returns>
         public static int[,] GenerateGrid()
         {
             //Random number generator
@@ -108,7 +108,7 @@ namespace SlotMachine
         /// <param name="Odds">Odds added to the winnings calculation</param>
         /// <param name="Wager">User wager</param>
         /// <param name="Grid">If statement checks through the grid to see if a winning combination is found</param>
-        /// <param name="TrioCombo"></param>
+        /// <param name="TrioCombo">TrioCombo used when there are three winning lines</param>
         /// <returns>Vertical winnings</returns>
         public static double CalculateAllVerticalWinnings(double Odds, double Wager, int[,] Grid, double TrioCombo)
         {
@@ -132,10 +132,10 @@ namespace SlotMachine
         /// <summary>
         /// Winning calculation for diagonal lines
         /// </summary>
-        /// <param name="Odds"></param>
-        /// <param name="Wager"></param>
-        /// <param name="Grid"></param>
-        /// <param name="TrioCombo"></param>
+        /// <param name="Odds">Odds added to the winnings calculation</param>
+        /// <param name="Wager">Wager that user places</param>
+        /// <param name="Grid">If statement checks through the grid to see if a winning combination is found</param>
+        /// <param name="TrioCombo">TrioCombo used when there are three winning lines</param>
         /// <returns>Winnings from when the diagonal lines are played</returns>
         public static double CalculateDiagWinnings(double Odds, double Wager, int[,] Grid, double TrioCombo)
         {
@@ -156,8 +156,5 @@ namespace SlotMachine
             }
             return Winnings;
         }
-
     }
 }
-
-
