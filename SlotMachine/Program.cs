@@ -10,7 +10,7 @@ namespace SlotMachine
             double Wager = 0;
 
             UiMethods.WelcomeMessage();
-                        
+
             //Grid array
             int[,] Grid = new int[3, 3];
 
@@ -21,8 +21,8 @@ namespace SlotMachine
 
                 // PlaceBet();
                 Wager = UiMethods.GetWager();
-                            
-                LogicMethods.GenerateGrid(Grid);
+
+                Grid = LogicMethods.GenerateGrid();
 
                 bool InvalidInput = true;
                 while (InvalidInput)
@@ -33,79 +33,28 @@ namespace SlotMachine
 
                     switch (LineToPlay)
                     {
-                        case "T":
-                            if (Grid[0, 0] == Grid[0, 1] && Grid[0, 1] == Grid[0, 2])
-                            {
-                                Winnings = LogicMethods.CalculateSingleLineWinnings(Wager, Odds);
-                            }
+                        case "T": //Plays the top line 
+                            Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                             break;
-                        case "C":
-                            if (Grid[1, 0] == Grid[1, 1] && Grid[1, 1] == Grid[1, 2])
-                            {
-                                Winnings = LogicMethods.CalculateSingleLineWinnings(Wager, Odds);
-                            }
+
+                        case "C": //Plays the central line
+                            Winnings = LogicMethods.CalculateRowWinnings(Wager, Odds, Grid, 1);
                             break;
-                        case "AH":
-                            int WinningRowcnt = 0;
-                            int SelectedRow;
-                            for (SelectedRow = 0; SelectedRow < 3; SelectedRow++)
-                            {
-                                if (Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 2] == Grid[SelectedRow, 2])
-                                {
-                                    WinningRowcnt++;
-                                }
-                            }
-                            if (WinningRowcnt == 3)
-                            {
-                                Winnings = LogicMethods.CalculateOtherWinnings(Wager, Odds, TrioCombo);
-                            }
+
+                        case "AH": //All Horizontal!
+                            Winnings = LogicMethods.CalculateHorizontalWinnings(Wager, Odds, Grid, TrioCombo);
                             break;
-                        case "TH":
-                            int WinningRowCnt = 0;
-                            int SelectedRw;
-                            for (SelectedRw = 0; SelectedRw < 3; SelectedRw++)
-                            {
-                                if (Grid[SelectedRw, 0] == Grid[SelectedRw, 1] &&
-                                     Grid[SelectedRw, 1] == Grid[SelectedRw, 2])
-                                {
-                                    WinningRowCnt++;
-                                }
-                                if (WinningRowCnt == 3)
-                                {
-                                    Winnings = LogicMethods.CalculateOtherWinnings(Wager, Odds, DuoCombo);
-                                }
-                            }
+
+                        case "TH": //Two Horizontal
+                            Winnings = LogicMethods.CalculateHorizontalWinnings(Wager, Odds, Grid, DuoCombo);
                             break;
-                        case "AV":
-                            int WinningColCnt = 0;
-                            int SelectedCol;
-                            for (SelectedCol = 0; SelectedCol < 3; SelectedCol++)
-                            {
-                                if (Grid[0, SelectedCol] == Grid[1, SelectedCol] && Grid[1, SelectedCol] == Grid[2, SelectedCol])
-                                {
-                                    WinningColCnt++;
-                                }
-                                if (WinningColCnt == 3)
-                                {
-                                    Winnings = LogicMethods.CalculateOtherWinnings(Wager, Odds, TrioCombo);
-                                }
-                            }
+
+                        case "AV": //Plays all vertical lines 
+                            Winnings = LogicMethods.CalculateAllVerticalWinnings(Wager, Odds, Grid, TrioCombo);
                             break;
-                        case "D":
-                            int WinningDiagCnt = 0;
-                            int SelectedDiag;
-                            for (SelectedDiag = 0; SelectedDiag < 3; SelectedDiag++)
-                            {
-                                if (Grid[SelectedDiag, 0] == Grid[SelectedDiag, 1] &&
-                                    Grid[SelectedDiag, 1] == Grid[SelectedDiag, 2])
-                                {
-                                    WinningDiagCnt++;
-                                }
-                                if (WinningDiagCnt == 3)
-                                {
-                                    Winnings = LogicMethods.CalculateOtherWinnings(Wager, Odds, TrioCombo);
-                                }
-                            }
+
+                        case "D": // Plays all diagonal lines                                            
+                            Winnings = LogicMethods.CalculateDiagWinnings(Wager, Odds, Grid, TrioCombo);
                             break;
                         default:
                             InvalidInput = true;
@@ -117,11 +66,14 @@ namespace SlotMachine
                     }
                 }
 
+                Console.WriteLine();
+
                 //Display the grid
                 UiMethods.DisplaySlotMatrix(Grid);
                 UiMethods.WinTotal(Winnings);
 
-                if (UiMethods.PlayMore() == true)
+
+                if (UiMethods.PlayMore())
                 {
                     PlayAgain = true;
                 }
@@ -133,5 +85,5 @@ namespace SlotMachine
             }
 
         }
-        }
     }
+}

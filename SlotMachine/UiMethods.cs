@@ -13,14 +13,13 @@ namespace SlotMachine
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the slot machine!");
             Console.WriteLine("----------------------------");
-
         }
 
         public static double GetWager()
         {
             double Bet = 0;
             Console.Write("Place your bet: $ ");
-            while(!double.TryParse(Console.ReadLine(), out Bet))
+            while (!double.TryParse(Console.ReadLine(), out Bet))
             {
                 Console.Write("Invalid number, please insert a valid number: $ ");
             }
@@ -41,8 +40,6 @@ namespace SlotMachine
 
         public static void DisplaySlotMatrix(int[,] Matrix)
         {
-            int[,] Grid = new int[3, 3];
-
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 3; col++)
@@ -52,7 +49,7 @@ namespace SlotMachine
                 Console.Write("\n");
             }
 
-            }
+        }
         public static bool PlayMore()
         {
             string Answer;
@@ -65,17 +62,15 @@ namespace SlotMachine
             else
             {
                 return false;
-               
+
             }
         }
 
-        public static double WinTotal(double WinningTotal)
+        public static void WinTotal(double WinningTotal)
         {
-
             Console.WriteLine("\n-------------------------------------");
             Console.WriteLine("Here are your winnings: $ " + WinningTotal);
             Console.WriteLine("--------------------------------------");
-            return WinningTotal;
         }
 
         public static void EndMessage()
