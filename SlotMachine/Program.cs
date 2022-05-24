@@ -36,23 +36,23 @@ namespace SlotMachine
                             break;
 
                         case "C": //Plays the central line
-                            Winnings = LogicMethods.CalculateRowWinnings(Wager, Odds, Grid, 1);
+                            Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 1);
                             break;
 
                         case "AH": //All Horizontal!
-                            Winnings = LogicMethods.CalculateHorizontalWinnings(Wager, Odds, Grid, TrioCombo);
+                            Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, TrioCombo);
                             break;
 
                         case "TH": //Two Horizontal
-                            Winnings = LogicMethods.CalculateHorizontalWinnings(Wager, Odds, Grid, DuoCombo);
+                            Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, DuoCombo);
                             break;
 
                         case "AV": //Plays all vertical lines 
-                            Winnings = LogicMethods.CalculateAllVerticalWinnings(Wager, Odds, Grid, TrioCombo);
+                            Winnings = LogicMethods.CalculateAllVerticalWinnings(Odds, Wager, Grid, TrioCombo);
                             break;
 
                         case "D": // Plays all diagonal lines                                            
-                            Winnings = LogicMethods.CalculateDiagWinnings(Wager, Odds, Grid, TrioCombo);
+                            Winnings = LogicMethods.CalculateDiagWinnings(Odds, Wager, Grid, TrioCombo);
                             break;
                         default:
                             InvalidInput = true;

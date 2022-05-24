@@ -78,5 +78,15 @@ namespace SlotMachine
             Console.WriteLine("Thanks for playing");
             Console.ReadKey();
         }
+
+        public enum GameOptions
+        {
+            TopLine,
+            CentreLine,
+            AllHorizontalLines,
+            TwoHorizontalLines,
+            AllVerticalLines,
+            DiagonalLines
+        }
     }
 }
