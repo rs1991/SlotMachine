@@ -16,9 +16,7 @@ namespace SlotMachine
         /// <returns>The winnings of a single line bet</returns>
         public static double CalculateSingleLineWinnings(double Bet, double Odd)
         {
-            double Total;
-            Total = Bet * Odd + 1;
-            return Total;
+            return Bet * Odd + 1;
         }
 
         /// <summary>
@@ -30,9 +28,7 @@ namespace SlotMachine
         /// <returns>The winnings for when three lines are played</returns>
         public static double CalculateTripleLineWinnings(double Bet, double Odd, double TrioCombo)
         {
-            double Total;
-            Total = Bet * Odd * TrioCombo + 1;
-            return Total;
+            return Bet * Odd * TrioCombo + 1;
         }
 
         /// <summary>

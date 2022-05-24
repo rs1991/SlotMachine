@@ -7,22 +7,20 @@ namespace SlotMachine
         static void Main(string[] args)
         {
             double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
-            double Wager = 0;
+            double Wager;
 
             UiMethods.WelcomeMessage();
 
             //Grid array
-            int[,] Grid = new int[3, 3];
+            //_ = new int[3, 3];
 
             bool PlayAgain = true;
 
             while (PlayAgain)
             {
-
                 // PlaceBet();
                 Wager = UiMethods.GetWager();
-
-                Grid = LogicMethods.GenerateGrid();
+                int[,] Grid = LogicMethods.GenerateGrid();
 
                 bool InvalidInput = true;
                 while (InvalidInput)
@@ -65,8 +63,6 @@ namespace SlotMachine
                         UiMethods.InValidInput();
                     }
                 }
-
-                Console.WriteLine();
 
                 //Display the grid
                 UiMethods.DisplaySlotMatrix(Grid);
