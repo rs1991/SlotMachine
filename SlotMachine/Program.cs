@@ -9,11 +9,8 @@ namespace SlotMachine
             double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
             double Wager;
 
-            UiMethods.WelcomeMessage();
-
-            //Grid array
-            //_ = new int[3, 3];
-
+            UiMethods.WelcomeMessage();        
+            
             bool PlayAgain = true;
 
             while (PlayAgain)
@@ -31,26 +28,24 @@ namespace SlotMachine
 
                     switch (LineToPlay)
                     {
-                        case "T": //Plays the top line 
+                        //Plays the top line
+
+                        case "T":   
+                            
                             Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                             break;
-
                         case "C": //Plays the central line
                             Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 1);
                             break;
-
                         case "AH": //All Horizontal!
                             Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, TrioCombo);
                             break;
-
                         case "TH": //Two Horizontal
                             Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, DuoCombo);
                             break;
-
                         case "AV": //Plays all vertical lines 
                             Winnings = LogicMethods.CalculateAllVerticalWinnings(Odds, Wager, Grid, TrioCombo);
                             break;
-
                         case "D": // Plays all diagonal lines                                            
                             Winnings = LogicMethods.CalculateDiagWinnings(Odds, Wager, Grid, TrioCombo);
                             break;

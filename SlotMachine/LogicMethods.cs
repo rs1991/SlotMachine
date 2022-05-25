@@ -47,7 +47,7 @@ namespace SlotMachine
             {
                 for (int col = 0; col < 3; col++)
                 {
-                    Grid1[row, col] = rng.Next(max + 1);
+                    //Grid1[row, col] = rng.Next(max + 1);
                 }
             }
             return Grid1;
@@ -85,7 +85,7 @@ namespace SlotMachine
             int SelectedRow;
             for (SelectedRow = 0; SelectedRow < 3; SelectedRow++)
             {
-                if (Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 2] == Grid[SelectedRow, 2])
+                if (Grid[SelectedRow, 0] == Grid[SelectedRow, 1] && Grid[SelectedRow, 1] == Grid[SelectedRow, 2])
                 {
                     WinningRowcnt++;
                 }
@@ -152,5 +152,7 @@ namespace SlotMachine
             }
             return Winnings;
         }
+
+        
     }
 }

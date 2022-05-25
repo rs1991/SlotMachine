@@ -29,7 +29,7 @@ namespace SlotMachine
         public static string DisplayOptions()
         {
             Console.WriteLine("Select which line you would like to play: 'T' Top line, 'C' Center line, 'AH' all horizontal lines, 'AV' All Vertical lines, 'D' Diagonal lines, 'TH' Two horizontal lines:");
-            string response = Console.ReadLine().ToUpper();
+            string response = Convert.ToString(Console.ReadLine().ToUpper());
             return response;
         }
 
@@ -88,5 +88,26 @@ namespace SlotMachine
             AllVerticalLines,
             DiagonalLines
         }
+
+        public static void SlotMachineGameOptions(GameOptions gameOptions)
+        {
+            
+            switch (gameOptions)
+            {
+                case GameOptions.TopLine:
+                break;
+                case GameOptions.CentreLine:
+                case GameOptions.AllHorizontalLines:
+                case GameOptions.TwoHorizontalLines:
+                case GameOptions.AllVerticalLines:
+                case GameOptions.DiagonalLines:
+                default:
+                    throw new Exception("Invalid choice");
+            }
+        }
+
+
+
+
     }
 }
