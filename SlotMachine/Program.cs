@@ -6,12 +6,12 @@ namespace SlotMachine
     {
         static void Main(string[] args)
         {
-            double Winnings = 0, Odds = 2, TrioCombo = 3, DuoCombo = 2;
-            double Wager;
+            double Winnings = 0, Wager = 0, Odds = 2;
 
             UiMethods.WelcomeMessage();        
             
             bool PlayAgain = true;
+                   
 
             while (PlayAgain)
             {
@@ -23,31 +23,28 @@ namespace SlotMachine
                 while (InvalidInput)
                 {
                     string LineToPlay = UiMethods.DisplayOptions();
-
                     InvalidInput = false;
 
                     switch (LineToPlay)
                     {
-                        //Plays the top line
-
-                        case "T":   
-                            
+                        case "T": //Plays the top line
+                            UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.TopLine);
                             Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                             break;
                         case "C": //Plays the central line
-                            Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 1);
+                            UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.CentreLine);
                             break;
                         case "AH": //All Horizontal!
-                            Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, TrioCombo);
+                            UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.AllHorizontalLines);
                             break;
                         case "TH": //Two Horizontal
-                            Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, DuoCombo);
+                            UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.TwoHorizontalLines);
                             break;
-                        case "AV": //Plays all vertical lines 
-                            Winnings = LogicMethods.CalculateAllVerticalWinnings(Odds, Wager, Grid, TrioCombo);
+                        case "AV": //Plays all vertical line
+                            UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.AllVerticalLines);
                             break;
                         case "D": // Plays all diagonal lines                                            
-                            Winnings = LogicMethods.CalculateDiagWinnings(Odds, Wager, Grid, TrioCombo);
+                            UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.DiagonalLines);
                             break;
                         default:
                             InvalidInput = true;

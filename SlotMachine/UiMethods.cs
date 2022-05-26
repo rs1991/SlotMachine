@@ -79,6 +79,7 @@ namespace SlotMachine
             Console.ReadKey();
         }
 
+
         public enum GameOptions
         {
             TopLine,
@@ -89,24 +90,41 @@ namespace SlotMachine
             DiagonalLines
         }
 
+
         public static void SlotMachineGameOptions(GameOptions gameOptions)
         {
-            
+            double Winnings = 0;
+            double Odds = 0;
+            double Wager = 0;
+            double DuoCombo = 2;
+            double TrioCombo = 3;
+            int[,] Grid = LogicMethods.GenerateGrid();
+
+
             switch (gameOptions)
             {
                 case GameOptions.TopLine:
-                break;
+                    Console.WriteLine("The top line only has been played");
+                    break;
                 case GameOptions.CentreLine:
+                    Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 1);
+                    break;
                 case GameOptions.AllHorizontalLines:
+                    Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, TrioCombo);
+                    break;
                 case GameOptions.TwoHorizontalLines:
+                    Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, DuoCombo);
+                    break;
                 case GameOptions.AllVerticalLines:
+                    Winnings = LogicMethods.CalculateAllVerticalWinnings(Odds, Wager, Grid, TrioCombo);
+                    break;
                 case GameOptions.DiagonalLines:
+                    Winnings = LogicMethods.CalculateDiagWinnings(Odds, Wager, Grid, TrioCombo);
+                    break;
                 default:
                     throw new Exception("Invalid choice");
             }
         }
-
-
 
 
     }

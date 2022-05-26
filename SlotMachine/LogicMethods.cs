@@ -47,7 +47,7 @@ namespace SlotMachine
             {
                 for (int col = 0; col < 3; col++)
                 {
-                    //Grid1[row, col] = rng.Next(max + 1);
+                  Grid1[row, col] = rng.Next(max + 1);
                 }
             }
             return Grid1;
@@ -154,5 +154,7 @@ namespace SlotMachine
         }
 
         
+
+
     }
 }
