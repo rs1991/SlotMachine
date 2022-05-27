@@ -39,7 +39,7 @@ namespace SlotMachine
         {
             //Random number generator
             Random rng = new Random();
-            int max = 9;
+            //int max = 9;
             //Grid array
             int[,] Grid1 = new int[3, 3];
             //Grid to generate random numbers
@@ -47,7 +47,7 @@ namespace SlotMachine
             {
                 for (int col = 0; col < 3; col++)
                 {
-                  Grid1[row, col] = rng.Next(max + 1);
+                  //Grid1[row, col] = rng.Next(max + 1);
                 }
             }
             return Grid1;

@@ -6,7 +6,8 @@ namespace SlotMachine
     {
         static void Main(string[] args)
         {
-            double Winnings = 0, Wager = 0, Odds = 2;
+            //double Winnings = 0;
+            //, Wager = 0, Odds = 2;
 
             UiMethods.WelcomeMessage();        
             
@@ -15,21 +16,23 @@ namespace SlotMachine
 
             while (PlayAgain)
             {
-                // PlaceBet();
-                Wager = UiMethods.GetWager();
+                //PlaceBet();
+                //Wager = UiMethods.GetWager();
                 int[,] Grid = LogicMethods.GenerateGrid();
 
                 bool InvalidInput = true;
                 while (InvalidInput)
                 {
                     string LineToPlay = UiMethods.DisplayOptions();
+
+
                     InvalidInput = false;
 
                     switch (LineToPlay)
                     {
                         case "T": //Plays the top line
                             UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.TopLine);
-                            Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
+                            //Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                             break;
                         case "C": //Plays the central line
                             UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.CentreLine);
@@ -58,7 +61,7 @@ namespace SlotMachine
 
                 //Display the grid
                 UiMethods.DisplaySlotMatrix(Grid);
-                UiMethods.WinTotal(Winnings);
+                //UiMethods.WinTotal(Winnings);
 
 
                 if (UiMethods.PlayMore())

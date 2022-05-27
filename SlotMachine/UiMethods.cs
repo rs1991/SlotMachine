@@ -93,21 +93,30 @@ namespace SlotMachine
 
         public static void SlotMachineGameOptions(GameOptions gameOptions)
         {
-            double Winnings = 0;
-            double Odds = 0;
-            double Wager = 0;
+            double Winnings;
+            double Odds = 2;
+            double Wager;
             double DuoCombo = 2;
             double TrioCombo = 3;
             int[,] Grid = LogicMethods.GenerateGrid();
 
+            //DisplayOptions();
+            //GetWager();
+                        
+            //GameOptions option = (GameOptions)Enum.Parse(typeof(GameOptions), res);
+
+            Wager = GetWager();
 
             switch (gameOptions)
             {
                 case GameOptions.TopLine:
-                    Console.WriteLine("The top line only has been played");
+                    //Console.WriteLine("The top line only has been played");
+                   Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                     break;
                 case GameOptions.CentreLine:
+                    { 
                     Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 1);
+                    }
                     break;
                 case GameOptions.AllHorizontalLines:
                     Winnings = LogicMethods.CalculateHorizontalWinnings(Odds, Wager, Grid, TrioCombo);
@@ -124,6 +133,7 @@ namespace SlotMachine
                 default:
                     throw new Exception("Invalid choice");
             }
+           WinTotal(Winnings);
         }
 
 
