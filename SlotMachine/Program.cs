@@ -24,15 +24,13 @@ namespace SlotMachine
                 while (InvalidInput)
                 {
                     string LineToPlay = UiMethods.DisplayOptions();
-
-
+                    
                     InvalidInput = false;
 
                     switch (LineToPlay)
                     {
                         case "T": //Plays the top line
                             UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.TopLine);
-                            //Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                             break;
                         case "C": //Plays the central line
                             UiMethods.SlotMachineGameOptions(UiMethods.GameOptions.CentreLine);
@@ -61,8 +59,6 @@ namespace SlotMachine
 
                 //Display the grid
                 UiMethods.DisplaySlotMatrix(Grid);
-                //UiMethods.WinTotal(Winnings);
-
 
                 if (UiMethods.PlayMore())
                 {

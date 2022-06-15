@@ -13,6 +13,12 @@ namespace SlotMachine
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the slot machine!");
             Console.WriteLine("----------------------------");
+
+            Console.WriteLine("You can select a number of options to play");
+            Console.WriteLine("Play now to win some money but remember be gambleaware.co.uk");
+            Console.WriteLine("18+ only");
+            Console.WriteLine("-------------------------------------------------------------");
+
         }
 
         public static double GetWager()
@@ -100,17 +106,13 @@ namespace SlotMachine
             double TrioCombo = 3;
             int[,] Grid = LogicMethods.GenerateGrid();
 
-            //DisplayOptions();
-            //GetWager();
-                        
-            //GameOptions option = (GameOptions)Enum.Parse(typeof(GameOptions), res);
+            
 
             Wager = GetWager();
 
             switch (gameOptions)
             {
                 case GameOptions.TopLine:
-                    //Console.WriteLine("The top line only has been played");
                    Winnings = LogicMethods.CalculateRowWinnings(Odds, Wager, Grid, 0);
                     break;
                 case GameOptions.CentreLine:
